@@ -95,7 +95,8 @@ const Footer = () => {
 
         {/* BOTTOM SECTION: Copyright */}
         <div className="pt-8 border-t border-stone-800 flex flex-col md:row justify-between items-center gap-4 text-[11px] uppercase tracking-[0.2em] text-stone-500">
-          <p>© 2026 The Royal Dine. All Rights Reserved.</p>
+          <p>© 2026 The Grand Terrace. 
+            Made By - B & D Solutions</p>
 
         </div>
       </div>

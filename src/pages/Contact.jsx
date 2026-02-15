@@ -105,7 +105,7 @@ export default function Contact() {
                 Call Us
               </motion.a>
               <motion.a
-                href="mailto:hello@grandterrace.lk"
+                href="infinityresturantsm@gmail.com"
                 whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.95 }}
                 className="group inline-flex items-center gap-3 bg-white/10 backdrop-blur-md border border-white/20 hover:bg-white hover:text-[#6F4E37] text-white px-8 py-4 text-sm uppercase tracking-wider font-bold transition-all duration-300 rounded-sm shadow-xl"
@@ -144,7 +144,7 @@ export default function Contact() {
           </div>
         </div>
       </section>
-
+      
       {/* --- MAIN CONTENT SECTION --- */}
       <section className="py-20 sm:py-28">
         <div className="max-w-7xl mx-auto px-6">
@@ -189,7 +189,7 @@ export default function Contact() {
                 <ContactInfoCard 
                   icon={<Mail size={20} className="text-[#6F4E37]" />} 
                   title="Email Us" 
-                  value="hello@grandterrace.lk"
+                  value="infinityresturantsm@gmail.com"
                   subValue="Response within 2 hours"
                   delay={0.3}
                 />
@@ -306,7 +306,7 @@ export default function Contact() {
                       />
                       <CustomField 
                         label="Email Address" 
-                        placeholder="john@example.com" 
+                        placeholder="infinityresturantsm@gmail.com" 
                         type="email"
                         icon={<Mail size={16} />}
                         required
