@@ -1,68 +1,75 @@
-import React, { useState } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
-import { ChevronRight, Play, Star, Award, Clock, MapPin, Phone, Mail, Calendar } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
+import { ChevronRight, Play, Star, Award, Clock, MapPin, Phone, Mail, Calendar, ArrowRight, Sparkles, Users, Coffee, Heart } from 'lucide-react';
 
 const Home = () => {
   const { scrollY } = useScroll();
   const heroOpacity = useTransform(scrollY, [0, 300], [1, 0]);
   const heroScale = useTransform(scrollY, [0, 300], [1, 1.1]);
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [activeExperience, setActiveExperience] = useState(0);
+
+  // Auto-rotate hero slides
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % 3);
+    }, 5000);
+    return () => clearInterval(timer);
+  }, []);
+
+  const heroImages = [
+    "https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&q=80&w=2400",
+    "https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&q=80&w=2400",
+    "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&q=80&w=2400"
+  ];
 
   return (
     <div className="bg-white min-h-screen overflow-x-hidden">
 
-      {/* --- NAVIGATION BAR --- */}
-      <motion.nav 
-        initial={{ y: -100 }}
-        animate={{ y: 0 }}
-        className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md shadow-sm"
-      >
-        <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-          <div className="text-2xl font-serif italic text-stone-900">The Royal Standard</div>
-          <div className="hidden md:flex items-center gap-8 text-sm font-medium text-stone-700">
-            <a href="#rooms" className="hover:text-amber-700 transition-colors">Rooms & Suites</a>
-            <a href="#dining" className="hover:text-amber-700 transition-colors">Dining</a>
-            <a href="#experiences" className="hover:text-amber-700 transition-colors">Experiences</a>
-            <a href="#gallery" className="hover:text-amber-700 transition-colors">Gallery</a>
-            <a href="#contact" className="hover:text-amber-700 transition-colors">Contact</a>
-          </div>
-          <button className="bg-amber-700 hover:bg-amber-800 text-white px-6 py-2.5 text-sm font-medium transition-all duration-300">
-            Book Now
-          </button>
-        </div>
-      </motion.nav>
-
-      {/* --- HERO SECTION --- */}
+      {/* --- ADVANCED HERO SECTION --- */}
       <section className="relative h-screen w-full flex items-center justify-center overflow-hidden">
-        <motion.div 
-          style={{ opacity: heroOpacity, scale: heroScale }}
-          className="absolute inset-0 z-0"
-        >
-          <img 
-            src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&q=80&w=2400" 
-            className="w-full h-full object-cover"
-            alt="Luxury Hotel"
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black/60"></div>
-        </motion.div>
+        {/* Animated Background Slideshow */}
+        <AnimatePresence mode="wait">
+          <motion.div 
+            key={currentSlide}
+            initial={{ opacity: 0, scale: 1.1 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 1.05 }}
+            transition={{ duration: 1.5 }}
+            style={{ opacity: heroOpacity, scale: heroScale }}
+            className="absolute inset-0 z-0"
+          >
+            <img 
+              src={heroImages[currentSlide]}
+              className="w-full h-full object-cover"
+              alt="Grand Terrace"
+            />
+            <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-black/70"></div>
+          </motion.div>
+        </AnimatePresence>
 
-        {/* Floating Info Cards */}
+        {/* Slide Indicators */}
+        <div className="absolute bottom-32 left-1/2 -translate-x-1/2 z-20 flex gap-3">
+          {heroImages.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => setCurrentSlide(index)}
+              className={`h-1 transition-all duration-500 ${
+                currentSlide === index 
+                  ? 'w-12 bg-[#D4A574]' 
+                  : 'w-8 bg-white/30 hover:bg-white/50'
+              }`}
+            />
+          ))}
+        </div>
+
+        {/* Floating Award Badge */}
         <motion.div 
-          initial={{ opacity: 0, x: -100 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ delay: 0.8, duration: 0.8 }}
-          className="absolute left-8 top-1/2 -translate-y-1/2 hidden lg:block z-20"
+          initial={{ opacity: 0, scale: 0.8, x: -100 }}
+          animate={{ opacity: 1, scale: 1, x: 0 }}
+          transition={{ delay: 0.8, duration: 0.8, type: "spring" }}
+          className="absolute left-8 top-1/2 -translate-y-1/2 hidden xl:block z-20"
         >
-          <div className="bg-white/95 backdrop-blur-md p-6 shadow-2xl max-w-xs">
-            <div className="flex items-center gap-2 text-amber-600 mb-3">
-              <Star size={16} fill="currentColor" />
-              <Star size={16} fill="currentColor" />
-              <Star size={16} fill="currentColor" />
-              <Star size={16} fill="currentColor" />
-              <Star size={16} fill="currentColor" />
-            </div>
-            <p className="text-sm text-stone-600 italic">"An unforgettable experience of pure luxury and sophistication"</p>
-            <p className="text-xs text-stone-400 mt-2">- Forbes Travel Guide</p>
-          </div>
         </motion.div>
 
         {/* Hero Content */}
@@ -70,225 +77,141 @@ const Home = () => {
           initial={{ opacity: 0, y: 60 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.3 }}
-          className="relative z-10 text-center text-white px-4 max-w-5xl"
+          className="relative z-10 text-center text-white px-4 max-w-6xl"
         >
           <motion.span 
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.5 }}
-            className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm px-6 py-2 rounded-full text-xs uppercase tracking-[0.3em] mb-8 border border-white/20"
+            className="inline-flex items-center gap-2 bg-gradient-to-r from-[#6F4E37]/80 to-[#8B6239]/80 backdrop-blur-md px-8 py-3 rounded-full text-xs uppercase tracking-[0.35em] mb-10 border border-[#D4A574]/30 shadow-xl"
           >
-            <Award size={14} />
-            5-Star Luxury Experience
+            <Sparkles size={16} className="text-[#D4A574]" />
+            <span className="text-[#F5E6D3]">Heritage Dining Excellence</span>
           </motion.span>
           
-          <h1 className="text-6xl md:text-8xl lg:text-9xl font-serif italic mb-6 leading-[0.95] tracking-tight">
-            The Royal <br /> 
-            <span className="text-amber-400">Standard</span>
-          </h1>
+          <motion.h1 
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.7 }}
+            className="text-6xl md:text-8xl lg:text-9xl font-serif italic mb-8 leading-[0.95] tracking-tight"
+          >
+            Grand <br /> 
+            <span className="text-[#D4A574]">Terrace</span>
+          </motion.h1>
           
-          <p className="text-lg md:text-xl text-white/90 mb-12 max-w-2xl mx-auto font-light">
-            Where timeless elegance meets modern luxury in the heart of the city
-          </p>
+          <motion.p 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.9 }}
+            className="text-xl md:text-2xl text-white/95 mb-12 max-w-3xl mx-auto font-light leading-relaxed"
+          >
+            Where timeless tradition meets contemporary culinary artistry in the heart of Colombo
+          </motion.p>
 
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 1.1 }}
+            className="flex flex-col sm:flex-row items-center justify-center gap-5"
+          >
             <motion.button 
-              whileHover={{ scale: 1.05 }}
+              whileHover={{ scale: 1.08, y: -3 }}
               whileTap={{ scale: 0.95 }}
-              className="bg-amber-600 hover:bg-amber-700 text-white px-12 py-4 text-sm uppercase tracking-wider font-medium transition-all duration-300 shadow-xl"
+              className="group bg-gradient-to-r from-[#6F4E37] to-[#8B6239] hover:from-[#5A3D2B] hover:to-[#6F4E37] text-white px-14 py-5 text-sm uppercase tracking-[0.25em] font-bold transition-all duration-500 shadow-2xl flex items-center gap-3 relative overflow-hidden"
             >
-              Reserve Your Stay
+              <span className="relative z-10 flex items-center gap-3">
+                <Calendar size={18} />
+                Reserve Your Table
+              </span>
+              {/* Button shine effect */}
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
             </motion.button>
+
             <motion.button 
-              whileHover={{ scale: 1.05 }}
-              className="flex items-center gap-3 text-white hover:text-amber-400 transition-colors uppercase text-sm tracking-wider font-medium group"
+              whileHover={{ scale: 1.08 }}
+              whileTap={{ scale: 0.95 }}
+              className="group flex items-center gap-3 text-white hover:text-[#D4A574] transition-all duration-300 uppercase text-sm tracking-[0.25em] font-bold"
             >
-              <span className="p-3 border-2 border-white/70 rounded-full group-hover:border-amber-400 transition-colors">
-                <Play size={16} fill="currentColor" />
+              <span className="p-4 border-2 border-white/60 group-hover:border-[#D4A574] rounded-full transition-all duration-300 group-hover:rotate-90 group-hover:bg-[#D4A574]/10">
+                <Play size={18} fill="currentColor" />
               </span>
               Virtual Tour
             </motion.button>
-          </div>
+          </motion.div>
+
+          {/* Quick Info Bar */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 1.3 }}
+            className="mt-16 flex flex-wrap items-center justify-center gap-8 text-sm text-white/80"
+          >
+            {[
+              { icon: <Coffee size={16} />, text: "Est. 1970" },
+              { icon: <MapPin size={16} />, text: "Colombo, Sri Lanka" },
+              { icon: <Clock size={16} />, text: "Open Daily 11AM-11PM" }
+            ].map((item, i) => (
+              <div key={i} className="flex items-center gap-2 group cursor-pointer">
+                <span className="text-[#D4A574] group-hover:scale-110 transition-transform">{item.icon}</span>
+                <span className="group-hover:text-white transition-colors">{item.text}</span>
+              </div>
+            ))}
+          </motion.div>
         </motion.div>
 
-        {/* Scroll Indicator */}
+        {/* Animated Scroll Indicator */}
         <motion.div 
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 1.5 }}
-          className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20"
+          transition={{ delay: 1.8 }}
+          className="absolute bottom-10 left-1/2 -translate-x-1/2 z-20"
         >
           <motion.div 
-            animate={{ y: [0, 10, 0] }}
-            transition={{ repeat: Infinity, duration: 2 }}
-            className="w-6 h-10 border-2 border-white/50 rounded-full flex items-start justify-center p-2"
+            animate={{ y: [0, 12, 0] }}
+            transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
+            className="flex flex-col items-center gap-2"
           >
-            <motion.div className="w-1 h-2 bg-white rounded-full" />
+            <span className="text-white/60 text-xs uppercase tracking-widest">Scroll</span>
+            <div className="w-6 h-10 border-2 border-white/40 rounded-full flex items-start justify-center p-2">
+              <motion.div className="w-1.5 h-2 bg-[#D4A574] rounded-full" />
+            </div>
           </motion.div>
         </motion.div>
       </section>
 
-      {/* --- STATS BAR --- */}
-      <section className="bg-stone-900 text-white py-12">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+      {/* --- ADVANCED STATS BAR --- */}
+      <section className="relative bg-gradient-to-r from-stone-900 via-[#6F4E37] to-stone-900 text-white py-16 overflow-hidden">
+        {/* Decorative Background Pattern */}
+        <div className="absolute inset-0 opacity-5">
+          <div className="absolute top-0 left-1/4 w-64 h-64 bg-[#D4A574] rounded-full blur-3xl"></div>
+          <div className="absolute bottom-0 right-1/4 w-64 h-64 bg-[#8B6239] rounded-full blur-3xl"></div>
+        </div>
+
+        <div className="max-w-7xl mx-auto px-6 relative z-10">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-12">
             {[
-              { value: "250+", label: "Luxury Rooms" },
-              { value: "5", label: "Dining Venues" },
-              { value: "50+", label: "Years Heritage" },
-              { value: "98%", label: "Guest Satisfaction" },
+              { value: "50+", label: "Years Heritage", icon: <Award size={28} /> },
+              { value: "5", label: "Dining Venues", icon: <Sparkles size={28} /> },
+              { value: "10K+", label: "Happy Guests", icon: <Users size={28} /> },
+              { value: "4.9/5", label: "Guest Rating", icon: <Star size={28} /> },
             ].map((stat, i) => (
-              <motion.div 
-                key={i}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-              >
-                <div className="text-4xl md:text-5xl font-serif italic text-amber-500 mb-2">{stat.value}</div>
-                <div className="text-sm text-stone-400 uppercase tracking-wider">{stat.label}</div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* --- WELCOME SECTION --- */}
-      <section className="py-24 px-6 md:px-20 bg-white">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid md:grid-cols-5 gap-16 items-center">
-            <motion.div 
-              initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
-              className="md:col-span-2"
-            >
-              <span className="text-amber-600 uppercase tracking-[0.3em] text-xs font-bold mb-4 block">Welcome to Excellence</span>
-              <h2 className="text-4xl md:text-6xl font-serif text-stone-900 leading-tight mb-6">
-                A Legacy of <br />
-                <span className="italic text-amber-700">Unparalleled</span> <br />
-                Hospitality
-              </h2>
-              <div className="w-20 h-1 bg-amber-600 mb-8"></div>
-              <p className="text-stone-600 leading-relaxed mb-6 text-lg">
-                For over five decades, The Royal Standard has been the epitome of refined luxury and impeccable service. Every detail is meticulously crafted to exceed the expectations of the most discerning guests.
-              </p>
-              <p className="text-stone-600 leading-relaxed mb-8">
-                From our Michelin-starred restaurants to our award-winning spa, from our opulent suites to our world-class concierge service—we don't just meet standards, we set them.
-              </p>
-              <div className="flex flex-wrap gap-4">
-                <motion.button 
-                  whileHover={{ x: 5 }}
-                  className="flex items-center gap-2 text-stone-900 font-bold uppercase tracking-wider text-sm group border-b-2 border-amber-600 pb-1"
-                >
-                  Discover Our Story 
-                  <ChevronRight size={18} className="group-hover:translate-x-1 transition-transform" />
-                </motion.button>
-              </div>
-            </motion.div>
-
-            <motion.div 
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 1 }}
-              className="md:col-span-3 grid grid-cols-2 gap-4"
-            >
-              <div className="space-y-4">
-                <img 
-                  src="https://images.unsplash.com/photo-1618773928121-c32242e63f39?auto=format&fit=crop&q=80&w=800" 
-                  className="w-full h-80 object-cover shadow-xl"
-                  alt="Luxury Suite"
-                />
-                <img 
-                  src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&q=80&w=800" 
-                  className="w-full h-64 object-cover shadow-xl"
-                  alt="Fine Dining"
-                />
-              </div>
-              <div className="space-y-4 pt-12">
-                <img 
-                  src="https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&q=80&w=800" 
-                  className="w-full h-64 object-cover shadow-xl"
-                  alt="Lobby"
-                />
-                <img 
-                  src="https://images.unsplash.com/photo-1590381105924-c72589b9ef3f?auto=format&fit=crop&q=80&w=800" 
-                  className="w-full h-80 object-cover shadow-xl"
-                  alt="Pool"
-                />
-              </div>
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
-      {/* --- FEATURED EXPERIENCES --- */}
-      <section className="bg-stone-50 py-24 px-6">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <span className="text-amber-600 uppercase tracking-[0.3em] text-xs font-bold mb-4 block">Signature Experiences</span>
-            <h3 className="text-4xl md:text-5xl font-serif text-stone-900 mb-6">Curated For You</h3>
-            <p className="text-stone-600 max-w-2xl mx-auto text-lg">
-              Immerse yourself in extraordinary experiences designed to create lasting memories
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {[
-              { 
-                title: "Fine Dining", 
-                subtitle: "Michelin Experience",
-                img: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?q=80&w=600",
-                icon: <Star size={20} />
-              },
-              { 
-                title: "Luxury Suites", 
-                subtitle: "Unmatched Comfort",
-                img: "https://images.unsplash.com/photo-1631049307264-da0ec9d70304?q=80&w=600",
-                icon: <Award size={20} />
-              },
-              { 
-                title: "Rooftop Bar", 
-                subtitle: "Skyline Views",
-                img: "https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=600",
-                icon: <Clock size={20} />
-              },
-              { 
-                title: "Spa & Wellness", 
-                subtitle: "Rejuvenate",
-                img: "https://images.unsplash.com/photo-1540555700478-4be289fbecef?q=80&w=600",
-                icon: <MapPin size={20} />
-              },
-            ].map((item, i) => (
               <motion.div 
                 key={i}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-                whileHover={{ y: -12 }}
-                className="relative group h-[480px] overflow-hidden cursor-pointer bg-white shadow-lg"
+                transition={{ delay: i * 0.15, duration: 0.6 }}
+                whileHover={{ y: -8, scale: 1.05 }}
+                className="text-center group cursor-pointer"
               >
-                <div className="overflow-hidden h-[320px]">
-                  <img 
-                    src={item.img} 
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" 
-                    alt={item.title} 
-                  />
+                <div className="flex justify-center text-[#D4A574] mb-4 group-hover:scale-110 transition-transform">
+                  {stat.icon}
                 </div>
-                <div className="absolute top-0 left-0 right-0 h-[320px] bg-gradient-to-b from-transparent via-transparent to-black/60"></div>
-                
-                <div className="p-6 relative">
-                  <div className="flex items-center gap-2 text-amber-600 mb-3">
-                    {item.icon}
-                  </div>
-                  <h5 className="text-2xl font-serif text-stone-900 mb-2">{item.title}</h5>
-                  <p className="text-sm text-stone-500 mb-4">{item.subtitle}</p>
-                  <button className="text-xs uppercase tracking-widest font-bold text-amber-700 flex items-center gap-2 group-hover:gap-3 transition-all">
-                    Learn More <ChevronRight size={14} />
-                  </button>
+                <div className="text-5xl md:text-6xl font-serif text-white mb-3 group-hover:text-[#F5E6D3] transition-colors">
+                  {stat.value}
+                </div>
+                <div className="text-sm text-stone-300 uppercase tracking-[0.2em] font-medium">
+                  {stat.label}
                 </div>
               </motion.div>
             ))}
@@ -296,48 +219,362 @@ const Home = () => {
         </div>
       </section>
 
-      {/* --- BOOKING BANNER --- */}
-      <section className="relative py-32 px-6 overflow-hidden">
+      {/* --- ENHANCED WELCOME SECTION --- */}
+      <section className="py-32 px-6 md:px-20 bg-white relative overflow-hidden">
+        {/* Decorative Elements */}
+        <div className="absolute top-0 right-0 w-96 h-96 bg-[#F5E6D3] rounded-full blur-3xl opacity-30"></div>
+        
+        <div className="max-w-7xl mx-auto relative z-10">
+          <div className="grid lg:grid-cols-2 gap-20 items-center">
+            <motion.div 
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+            >
+              <motion.span 
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }}
+                className="inline-block text-[#6F4E37] uppercase tracking-[0.35em] text-xs font-black mb-6 bg-[#F5E6D3] px-5 py-2 rounded-full"
+              >
+                Welcome to Excellence
+              </motion.span>
+              
+              <h2 className="text-5xl md:text-7xl font-serif text-stone-900 leading-[1.1] mb-8">
+                A Legacy of <br />
+                <span className="italic text-[#6F4E37]">Unparalleled</span> <br />
+                Hospitality
+              </h2>
+              
+              <div className="w-24 h-1.5 bg-gradient-to-r from-[#6F4E37] to-[#8B6239] mb-10 rounded-full"></div>
+              
+              <p className="text-xl text-stone-600 leading-relaxed mb-6 font-light">
+                For over five decades, Grand Terrace has been the epitome of refined dining and impeccable service. Every detail is meticulously crafted to exceed the expectations of the most discerning guests.
+              </p>
+              
+              <p className="text-lg text-stone-500 leading-relaxed mb-10">
+                From our master chefs to our award-winning ambiance, from our curated wine selection to our world-class service—we don't just meet standards, we set them.
+              </p>
+
+              {/* Feature List */}
+              <div className="space-y-4 mb-10">
+                {[
+                  { icon: <Coffee size={20} />, text: "Authentic Sri Lankan & International Cuisine" },
+                  { icon: <Star size={20} />, text: "Award-Winning Culinary Team" },
+                  { icon: <Heart size={20} />, text: "Exceptional Guest Experience" }
+                ].map((feature, i) => (
+                  <motion.div
+                    key={i}
+                    initial={{ opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: i * 0.1 }}
+                    className="flex items-center gap-4 group"
+                  >
+                    <div className="p-3 bg-gradient-to-br from-[#F5E6D3] to-[#E8D4BF] rounded-lg text-[#6F4E37] group-hover:scale-110 transition-transform">
+                      {feature.icon}
+                    </div>
+                    <span className="text-stone-700 font-medium group-hover:text-[#6F4E37] transition-colors">
+                      {feature.text}
+                    </span>
+                  </motion.div>
+                ))}
+              </div>
+              
+              <motion.button 
+                whileHover={{ x: 8 }}
+                className="flex items-center gap-3 text-[#6F4E37] font-bold uppercase tracking-[0.25em] text-sm group border-b-2 border-[#6F4E37] pb-2 hover:border-[#8B6239] transition-all"
+              >
+                Discover Our Story 
+                <ChevronRight size={20} className="group-hover:translate-x-2 transition-transform" />
+              </motion.button>
+            </motion.div>
+
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 1, delay: 0.2 }}
+              className="grid grid-cols-2 gap-5"
+            >
+              <div className="space-y-5">
+                <motion.div
+                  whileHover={{ scale: 1.05, rotate: -2 }}
+                  transition={{ type: "spring", stiffness: 300 }}
+                  className="relative overflow-hidden shadow-2xl group"
+                >
+                  <img 
+                    src="https://images.unsplash.com/photo-1618773928121-c32242e63f39?auto=format&fit=crop&q=80&w=800" 
+                    className="w-full h-80 object-cover group-hover:scale-110 transition-transform duration-700"
+                    alt="Luxury Suite"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#6F4E37]/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                </motion.div>
+                
+                <motion.div
+                  whileHover={{ scale: 1.05, rotate: 2 }}
+                  transition={{ type: "spring", stiffness: 300 }}
+                  className="relative overflow-hidden shadow-2xl group"
+                >
+                  <img 
+                    src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&q=80&w=800" 
+                    className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-700"
+                    alt="Fine Dining"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#6F4E37]/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                </motion.div>
+              </div>
+              
+              <div className="space-y-5 pt-16">
+                <motion.div
+                  whileHover={{ scale: 1.05, rotate: 2 }}
+                  transition={{ type: "spring", stiffness: 300 }}
+                  className="relative overflow-hidden shadow-2xl group"
+                >
+                  <img 
+                    src="https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&q=80&w=800" 
+                    className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-700"
+                    alt="Lobby"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#6F4E37]/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                </motion.div>
+                
+                <motion.div
+                  whileHover={{ scale: 1.05, rotate: -2 }}
+                  transition={{ type: "spring", stiffness: 300 }}
+                  className="relative overflow-hidden shadow-2xl group"
+                >
+                  <img 
+                    src="https://images.unsplash.com/photo-1590381105924-c72589b9ef3f?auto=format&fit=crop&q=80&w=800" 
+                    className="w-full h-80 object-cover group-hover:scale-110 transition-transform duration-700"
+                    alt="Pool"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#6F4E37]/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                </motion.div>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* --- INTERACTIVE EXPERIENCES SECTION --- */}
+      <section className="bg-gradient-to-b from-stone-50 to-white py-32 px-6">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-20">
+            <motion.span 
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              className="inline-block text-[#6F4E37] uppercase tracking-[0.35em] text-xs font-black mb-6 bg-[#F5E6D3] px-5 py-2 rounded-full"
+            >
+              Signature Experiences
+            </motion.span>
+            <h3 className="text-5xl md:text-6xl font-serif text-stone-900 mb-8">Curated For You</h3>
+            <p className="text-stone-600 max-w-3xl mx-auto text-xl leading-relaxed">
+              Immerse yourself in extraordinary experiences designed to create lasting memories
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {[
+              { 
+                title: "Fine Dining", 
+                subtitle: "Michelin-Inspired",
+                img: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?q=80&w=600",
+                icon: <Star size={22} />,
+                color: "from-[#6F4E37]"
+              },
+              { 
+                title: "Private Events", 
+                subtitle: "Exclusive Venues",
+                img: "https://images.unsplash.com/photo-1631049307264-da0ec9d70304?q=80&w=600",
+                icon: <Award size={22} />,
+                color: "from-[#8B6239]"
+              },
+              { 
+                title: "Rooftop Bar", 
+                subtitle: "Skyline Views",
+                img: "https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=600",
+                icon: <Clock size={22} />,
+                color: "from-[#6F4E37]"
+              },
+              { 
+                title: "Culinary Classes", 
+                subtitle: "Learn & Create",
+                img: "https://images.unsplash.com/photo-1540555700478-4be289fbecef?q=80&w=600",
+                icon: <Coffee size={22} />,
+                color: "from-[#8B6239]"
+              },
+            ].map((item, i) => (
+              <motion.div 
+                key={i}
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.15, duration: 0.6 }}
+                onHoverStart={() => setActiveExperience(i)}
+                onHoverEnd={() => setActiveExperience(-1)}
+                className="relative group h-[550px] overflow-hidden cursor-pointer bg-white shadow-xl border-2 border-stone-100 hover:border-[#D4A574] transition-all duration-500"
+              >
+                <div className="overflow-hidden h-[350px] relative">
+                  <motion.img 
+                    src={item.img} 
+                    animate={{ scale: activeExperience === i ? 1.15 : 1 }}
+                    transition={{ duration: 0.7 }}
+                    className="w-full h-full object-cover"
+                    alt={item.title} 
+                  />
+                  {/* Gradient Overlay */}
+                  <div className={`absolute inset-0 bg-gradient-to-b ${item.color} via-transparent to-transparent opacity-0 group-hover:opacity-60 transition-opacity duration-500`}></div>
+                  
+                  {/* Floating Icon */}
+                  <motion.div
+                    initial={{ y: 20, opacity: 0 }}
+                    animate={{ 
+                      y: activeExperience === i ? 0 : 20,
+                      opacity: activeExperience === i ? 1 : 0
+                    }}
+                    className="absolute top-6 right-6 p-4 bg-white/95 backdrop-blur-sm rounded-full text-[#6F4E37] shadow-xl"
+                  >
+                    {item.icon}
+                  </motion.div>
+                </div>
+                
+                <div className="p-8 relative">
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="p-2 bg-gradient-to-br from-[#F5E6D3] to-[#E8D4BF] rounded-lg text-[#6F4E37]">
+                      {item.icon}
+                    </div>
+                    <div className="h-px flex-1 bg-gradient-to-r from-[#6F4E37]/30 to-transparent"></div>
+                  </div>
+                  
+                  <h5 className="text-2xl font-serif text-stone-900 mb-2 group-hover:text-[#6F4E37] transition-colors">
+                    {item.title}
+                  </h5>
+                  <p className="text-sm text-stone-500 mb-6 uppercase tracking-wider">
+                    {item.subtitle}
+                  </p>
+                  
+                  <motion.button 
+                    animate={{ 
+                      x: activeExperience === i ? 5 : 0
+                    }}
+                    className="flex items-center gap-2 text-xs uppercase tracking-widest font-bold text-[#6F4E37] group-hover:text-[#8B6239] transition-colors"
+                  >
+                    Explore <ArrowRight size={14} />
+                  </motion.button>
+                </div>
+
+                {/* Corner Accent */}
+                <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-[#6F4E37]/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* --- PREMIUM BOOKING BANNER --- */}
+      <section className="relative py-40 px-6 overflow-hidden">
         <div className="absolute inset-0 z-0">
           <img 
             src="https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?auto=format&fit=crop&q=80&w=2000" 
             className="w-full h-full object-cover"
-            alt="Hotel"
+            alt="Grand Terrace"
           />
-          <div className="absolute inset-0 bg-stone-900/75"></div>
+          <div className="absolute inset-0 bg-gradient-to-br from-stone-900/90 via-[#6F4E37]/80 to-stone-900/90"></div>
+          
+          {/* Decorative Elements */}
+          <div className="absolute inset-0 opacity-20">
+            <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-[#D4A574] rounded-full blur-3xl"></div>
+            <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-[#8B6239] rounded-full blur-3xl"></div>
+          </div>
         </div>
 
         <motion.div 
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="relative z-10 max-w-4xl mx-auto text-center text-white"
+          transition={{ duration: 0.8 }}
+          className="relative z-10 max-w-5xl mx-auto text-center text-white"
         >
-          <span className="text-amber-400 uppercase tracking-[0.3em] text-xs font-bold mb-6 block">Limited Time Offer</span>
-          <h3 className="text-4xl md:text-6xl font-serif mb-8">
-            Experience Luxury <br />
-            <span className="italic text-amber-400">Like Never Before</span>
+          <motion.span 
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2 }}
+            className="inline-block text-[#D4A574] uppercase tracking-[0.4em] text-xs font-black mb-8 bg-white/10 backdrop-blur-sm px-6 py-3 rounded-full border border-[#D4A574]/30"
+          >
+            Special Offer
+          </motion.span>
+          
+          <h3 className="text-5xl md:text-7xl font-serif mb-10 leading-tight">
+            Experience Culinary Excellence <br />
+            <span className="italic text-[#D4A574]">Like Never Before</span>
           </h3>
-          <p className="text-xl text-white/90 mb-10 max-w-2xl mx-auto">
-            Book your stay today and enjoy exclusive benefits including complimentary breakfast, spa credits, and late checkout
+          
+          <p className="text-xl md:text-2xl text-white/90 mb-14 max-w-3xl mx-auto leading-relaxed font-light">
+            Book your table today and enjoy exclusive benefits including complimentary appetizers, 
+            premium wine pairing, and personalized service
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          
+          <div className="flex flex-col sm:flex-row gap-6 justify-center">
             <motion.button 
-              whileHover={{ scale: 1.05 }}
-              className="bg-amber-600 hover:bg-amber-700 text-white px-12 py-4 text-sm uppercase tracking-wider font-medium transition-all duration-300 shadow-xl"
+              whileHover={{ scale: 1.08, y: -3 }}
+              whileTap={{ scale: 0.95 }}
+              className="group bg-gradient-to-r from-[#6F4E37] to-[#8B6239] hover:from-white hover:to-white text-white hover:text-[#6F4E37] px-14 py-5 text-sm uppercase tracking-[0.25em] font-black transition-all duration-500 shadow-2xl hover:shadow-[#D4A574]/50 flex items-center justify-center gap-3 relative overflow-hidden"
             >
-              Book Now
+              <span className="relative z-10">Book Now</span>
+              <ArrowRight size={18} className="relative z-10 group-hover:translate-x-2 transition-transform" />
             </motion.button>
+            
             <motion.button 
-              whileHover={{ scale: 1.05 }}
-              className="bg-white/10 backdrop-blur-sm hover:bg-white/20 border-2 border-white/50 text-white px-12 py-4 text-sm uppercase tracking-wider font-medium transition-all duration-300"
+              whileHover={{ scale: 1.08, y: -3 }}
+              whileTap={{ scale: 0.95 }}
+              className="bg-white/10 backdrop-blur-md hover:bg-white/20 border-2 border-white/50 hover:border-[#D4A574] text-white px-14 py-5 text-sm uppercase tracking-[0.25em] font-black transition-all duration-500 shadow-xl"
             >
-              View Packages
+              View Menu
             </motion.button>
           </div>
+
+          {/* Trust Badges */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.6 }}
+            className="mt-16 flex flex-wrap items-center justify-center gap-8 text-sm text-white/70"
+          >
+            {[
+              "Forbes Recommended",
+              "50+ Years Heritage",
+              "10,000+ Happy Guests"
+            ].map((badge, i) => (
+              <div key={i} className="flex items-center gap-2">
+                <div className="w-1.5 h-1.5 bg-[#D4A574] rounded-full"></div>
+                <span>{badge}</span>
+              </div>
+            ))}
+          </motion.div>
         </motion.div>
       </section>
 
+      {/* --- FOOTER CTA --- */}
+      <section className="bg-stone-900 py-20 px-6 border-t border-[#6F4E37]/20">
+        <div className="max-w-7xl mx-auto text-center">
+          <div className="flex items-center justify-center gap-3 mb-6">
+            <div className="h-px w-16 bg-gradient-to-r from-transparent to-[#6F4E37]"></div>
+            <Coffee className="text-[#D4A574]" size={32} />
+            <div className="h-px w-16 bg-gradient-to-l from-transparent to-[#6F4E37]"></div>
+          </div>
+          <h3 className="text-3xl md:text-4xl font-serif text-white italic mb-4">
+            Grand Terrace Hotel
+          </h3>
+          <p className="text-stone-400 text-sm uppercase tracking-[0.3em]">
+            A Heritage of Excellence Since 1970
+          </p>
+        </div>
+      </section>
     </div>
   );
 };

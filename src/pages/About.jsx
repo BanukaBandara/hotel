@@ -11,8 +11,8 @@ export default function About() {
       <section className="relative py-24 px-6 overflow-hidden bg-gradient-to-br from-stone-900 via-stone-800 to-stone-900">
         {/* Decorative Elements */}
         <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-20 left-10 w-96 h-96 bg-amber-500 rounded-full blur-3xl"></div>
-          <div className="absolute bottom-20 right-10 w-96 h-96 bg-amber-600 rounded-full blur-3xl"></div>
+          <div className="absolute top-20 left-10 w-96 h-96 bg-[#6F4E37] rounded-full blur-3xl"></div>
+          <div className="absolute bottom-20 right-10 w-96 h-96 bg-[#8B6239] rounded-full blur-3xl"></div>
         </div>
 
         <motion.div
@@ -25,13 +25,13 @@ export default function About() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.3 }}
-            className="inline-block uppercase tracking-[0.4em] text-xs text-amber-400 font-bold mb-6 bg-white/10 px-6 py-2 rounded-full backdrop-blur-sm"
+            className="inline-block uppercase tracking-[0.4em] text-xs text-[#D4A574] font-bold mb-6 bg-white/10 px-6 py-2 rounded-full backdrop-blur-sm"
           >
             About Us
           </motion.span>
           <h1 className="text-5xl md:text-7xl font-serif italic mb-6">
             A Modern Heritage <br />
-            <span className="text-amber-400">Dining Concept</span>
+            <span className="text-[#D4A574]">Dining Concept</span>
           </h1>
           <p className="text-lg md:text-xl text-stone-300 leading-relaxed max-w-2xl mx-auto">
             Tell your story here — how the restaurant started, what you serve, and what guests should feel when they visit.
@@ -57,8 +57,8 @@ export default function About() {
                 transition={{ delay: i * 0.1 }}
                 className="text-center"
               >
-                <div className="flex justify-center text-amber-500 mb-3">{stat.icon}</div>
-                <div className="text-3xl md:text-4xl font-serif text-amber-400 mb-1">{stat.value}</div>
+                <div className="flex justify-center text-[#8B6239] mb-3">{stat.icon}</div>
+                <div className="text-3xl md:text-4xl font-serif text-[#D4A574] mb-1">{stat.value}</div>
                 <div className="text-sm text-stone-400 uppercase tracking-wider">{stat.label}</div>
               </motion.div>
             ))}
@@ -77,12 +77,12 @@ export default function About() {
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
             >
-              <span className="text-amber-600 uppercase tracking-[0.3em] text-xs font-bold mb-4 block">Our Story</span>
+              <span className="text-[#6F4E37] uppercase tracking-[0.3em] text-xs font-bold mb-4 block">Our Story</span>
               <h2 className="text-4xl md:text-5xl font-serif text-stone-900 mb-6 leading-tight">
                 Where Tradition Meets <br />
-                <span className="italic text-amber-700">Modern Excellence</span>
+                <span className="italic text-[#6F4E37]">Modern Excellence</span>
               </h2>
-              <div className="w-20 h-1 bg-amber-600 mb-8"></div>
+              <div className="w-20 h-1 bg-[#6F4E37] mb-8"></div>
 
               <p className="text-lg text-stone-600 leading-relaxed mb-6">
                 Replace this text with your real brand story. Keep it short, premium, and emotional: ambience, signature
@@ -106,9 +106,9 @@ export default function About() {
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: i * 0.1 }}
-                    className="flex items-start gap-4 bg-stone-50 p-4 border-l-4 border-amber-600"
+                    className="flex items-start gap-4 bg-stone-50 p-4 border-l-4 border-[#6F4E37]"
                   >
-                    <div className="text-amber-600 mt-1">{value.icon}</div>
+                    <div className="text-[#6F4E37] mt-1">{value.icon}</div>
                     <div>
                       <h4 className="font-bold text-stone-900 mb-1">{value.title}</h4>
                       <p className="text-sm text-stone-600">{value.desc}</p>
@@ -173,7 +173,7 @@ export default function About() {
       <section className="py-24 px-6 bg-stone-50">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <span className="text-amber-600 uppercase tracking-[0.3em] text-xs font-bold mb-4 block">Our Philosophy</span>
+            <span className="text-[#6F4E37] uppercase tracking-[0.3em] text-xs font-bold mb-4 block">Our Philosophy</span>
             <h2 className="text-4xl md:text-5xl font-serif text-stone-900">Mission & Vision</h2>
           </div>
 
@@ -182,11 +182,11 @@ export default function About() {
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="bg-white p-10 shadow-lg border-t-4 border-amber-600"
+              className="bg-white p-10 shadow-lg border-t-4 border-[#6F4E37]"
             >
               <div className="flex items-center gap-3 mb-6">
-                <div className="p-3 bg-amber-100 rounded-lg">
-                  <Heart className="text-amber-700" size={28} />
+                <div className="p-3 bg-[#F5E6D3] rounded-lg">
+                  <Heart className="text-[#6F4E37]" size={28} />
                 </div>
                 <h3 className="text-2xl font-serif text-stone-900">Our Mission</h3>
               </div>
@@ -201,11 +201,11 @@ export default function About() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.2 }}
-              className="bg-white p-10 shadow-lg border-t-4 border-amber-600"
+              className="bg-white p-10 shadow-lg border-t-4 border-[#6F4E37]"
             >
               <div className="flex items-center gap-3 mb-6">
-                <div className="p-3 bg-amber-100 rounded-lg">
-                  <Star className="text-amber-700" size={28} />
+                <div className="p-3 bg-[#F5E6D3] rounded-lg">
+                  <Star className="text-[#6F4E37]" size={28} />
                 </div>
                 <h3 className="text-2xl font-serif text-stone-900">Our Vision</h3>
               </div>
@@ -222,7 +222,7 @@ export default function About() {
       <section className="py-24 px-6 bg-white">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <span className="text-amber-600 uppercase tracking-[0.3em] text-xs font-bold mb-4 block">Why Choose Us</span>
+            <span className="text-[#6F4E37] uppercase tracking-[0.3em] text-xs font-bold mb-4 block">Why Choose Us</span>
             <h2 className="text-4xl md:text-5xl font-serif text-stone-900 mb-6">What Makes Us Special</h2>
             <p className="text-stone-600 max-w-2xl mx-auto text-lg">
               Discover the elements that set Grand Terrace apart from the rest
@@ -269,9 +269,9 @@ export default function About() {
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
                 whileHover={{ y: -8 }}
-                className="text-center p-8 bg-stone-50 border border-stone-200 hover:border-amber-200 hover:shadow-xl transition-all"
+                className="text-center p-8 bg-stone-50 border border-stone-200 hover:border-[#8B6239] hover:shadow-xl transition-all"
               >
-                <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-amber-100 to-amber-200 rounded-full text-amber-700 mb-6">
+                <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-[#F5E6D3] to-[#E8D4BF] rounded-full text-[#6F4E37] mb-6">
                   {feature.icon}
                 </div>
                 <h3 className="text-xl font-serif text-stone-900 mb-3">{feature.title}</h3>
@@ -282,11 +282,11 @@ export default function About() {
         </div>
       </section>
 
-      {/* Team Section (Optional) */}
+      {/* Team Section */}
       <section className="py-24 px-6 bg-stone-50">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <span className="text-amber-600 uppercase tracking-[0.3em] text-xs font-bold mb-4 block">Our Team</span>
+            <span className="text-[#6F4E37] uppercase tracking-[0.3em] text-xs font-bold mb-4 block">Our Team</span>
             <h2 className="text-4xl md:text-5xl font-serif text-stone-900 mb-6">Meet the Masters</h2>
             <p className="text-stone-600 max-w-2xl mx-auto">
               The talented individuals who bring Grand Terrace to life every day
@@ -316,7 +316,7 @@ export default function About() {
                 </div>
                 <div className="p-6 text-center">
                   <h3 className="text-xl font-serif text-stone-900 mb-1">{member.name}</h3>
-                  <p className="text-sm text-amber-700 uppercase tracking-wider font-medium">{member.role}</p>
+                  <p className="text-sm text-[#6F4E37] uppercase tracking-wider font-medium">{member.role}</p>
                 </div>
               </motion.div>
             ))}
@@ -328,8 +328,8 @@ export default function About() {
       <section className="relative py-32 px-6 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-stone-900 via-stone-800 to-stone-900">
           <div className="absolute inset-0 opacity-10">
-            <div className="absolute top-20 left-10 w-96 h-96 bg-amber-500 rounded-full blur-3xl"></div>
-            <div className="absolute bottom-20 right-10 w-96 h-96 bg-amber-600 rounded-full blur-3xl"></div>
+            <div className="absolute top-20 left-10 w-96 h-96 bg-[#6F4E37] rounded-full blur-3xl"></div>
+            <div className="absolute bottom-20 right-10 w-96 h-96 bg-[#8B6239] rounded-full blur-3xl"></div>
           </div>
         </div>
 
@@ -339,10 +339,10 @@ export default function About() {
           viewport={{ once: true }}
           className="relative z-10 max-w-4xl mx-auto text-center text-white"
         >
-          <Utensils className="mx-auto mb-6 text-amber-500" size={48} />
+          <Utensils className="mx-auto mb-6 text-[#D4A574]" size={48} />
           <h2 className="text-4xl md:text-5xl font-serif italic mb-6">
             Ready to Experience <br />
-            <span className="text-amber-400">Grand Terrace?</span>
+            <span className="text-[#D4A574]">Grand Terrace?</span>
           </h2>
           <p className="text-xl text-stone-300 mb-10 max-w-2xl mx-auto">
             Reserve your table today and discover why we're the talk of the town
@@ -350,7 +350,7 @@ export default function About() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <motion.button
               whileHover={{ scale: 1.05 }}
-              className="bg-amber-600 hover:bg-amber-700 text-white px-12 py-4 text-sm uppercase tracking-wider font-medium transition-all shadow-xl flex items-center justify-center gap-2"
+              className="bg-[#6F4E37] hover:bg-[#5A3D2B] text-white px-12 py-4 text-sm uppercase tracking-wider font-medium transition-all shadow-xl flex items-center justify-center gap-2"
             >
               <Phone size={18} />
               Make Reservation
@@ -377,10 +377,10 @@ function Stat({ icon, label, value, delay }) {
       viewport={{ once: true }}
       transition={{ delay }}
       whileHover={{ y: -5 }}
-      className="bg-white border-2 border-stone-200 p-6 shadow-md hover:shadow-xl hover:border-amber-200 transition-all group"
+      className="bg-white border-2 border-stone-200 p-6 shadow-md hover:shadow-xl hover:border-[#8B6239] transition-all group"
     >
       <div className="flex items-center gap-3 mb-3">
-        <div className="text-amber-600 group-hover:text-amber-700 transition-colors">
+        <div className="text-[#6F4E37] group-hover:text-[#5A3D2B] transition-colors">
           {icon}
         </div>
         <div className="text-xs uppercase tracking-wider text-stone-500 font-bold">{label}</div>
