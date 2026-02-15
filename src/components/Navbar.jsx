@@ -1,91 +1,188 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import React from "react";
+import { Link, NavLink } from "react-router-dom";
+import { Menu, X } from "lucide-react";
+import { AnimatePresence, motion } from "framer-motion";
+
 import MainLogo from "../assets/grandterrace-logo.jpeg";
 import SubLogosStrip from "../assets/grandterrace-logos-strip.jpeg";
 
+const NAV = [
+  { to: "/", label: "Home" },
+  { to: "/dining", label: "Dining" },
+  { to: "/about", label: "About" },
+  { to: "/contact", label: "Contact" },
+];
 
-const Navbar = () => {
-  const [isScrolled, setIsScrolled] = useState(false);
+export default function Navbar() {
+  const [isScrolled, setIsScrolled] = React.useState(false);
+  const [open, setOpen] = React.useState(false);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+  React.useEffect(() => {
+    const onScroll = () => setIsScrolled(window.scrollY > 16);
+    onScroll();
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  React.useEffect(() => {
+    const onKey = (e) => e.key === "Escape" && setOpen(false);
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
   }, []);
 
   return (
-    <header className="fixed w-full z-[100] transition-all duration-700">
-      
-      
-      <div className={`w-full bg-white transition-all duration-500 border-b border-stone-100 ${isScrolled ? 'h-0 opacity-0 overflow-hidden' : 'h-16 opacity-100'}`}>
-        <div className="max-w-[1400px] mx-auto h-full flex justify-between items-center px-10">
-          <div className="text-[10px] uppercase tracking-[0.3em] text-stone-400 font-medium">
-            Part of Grand Terrace Hotel
-          </div>
-          <img 
-            src={SubLogosStrip} 
-            alt="Grand Terrace Sub Brands" 
-            className="h-10 md:h-12 object-contain grayscale hover:grayscale-0 transition-all duration-500 cursor-pointer"
+    <header className="fixed inset-x-0 top-0 z-[100]">
+      {/* Top subtle info bar (desktop only) */}
+      <div
+        className={[
+          "hidden md:block border-b border-black/10 bg-white/80 backdrop-blur",
+          "transition-all duration-300",
+          isScrolled ? "h-0 opacity-0 overflow-hidden" : "h-12 opacity-100",
+        ].join(" ")}
+      >
+        <div className="container-pad flex h-12 items-center justify-between text-[10px] tracking-[0.28em] uppercase text-black/55">
+          <div className="hidden lg:block">Part of Grand Terrace Hotel</div>
+
+          <img
+            src={SubLogosStrip}
+            alt="Grand Terrace Sub Brands"
+            className="h-7 w-auto object-contain opacity-80 hover:opacity-100 transition"
+            loading="eager"
           />
-          <div className="hidden md:block text-[10px] uppercase tracking-[0.3em] text-stone-400 font-medium">
-            Colombo, Sri Lanka
-          </div>
+
+          <div className="hidden lg:block">Colombo, Sri Lanka</div>
         </div>
       </div>
 
-      {/* --- MAIN NAVIGATION --- */}
-      <nav className={`w-full transition-all duration-500 ${
-        isScrolled 
-        ? 'bg-white/80 backdrop-blur-lg shadow-xl py-3 border-b border-stone-200' 
-        : 'bg-gradient-to-b from-black/60 to-transparent py-6'
-      }`}>
-        <div className="max-w-[1400px] mx-auto px-10 flex justify-between items-center">
-          
-          <Link to="/" className="flex-shrink-0">
-            <div className={`bg-white p-2 rounded-sm transition-all duration-500 shadow-lg ${isScrolled ? 'scale-90' : 'scale-110'}`}>
-              <img 
-                src={MainLogo} 
-                alt="Grand Terrace Logo" 
-                className="h-14 md:h-20 w-auto object-contain" 
+      {/* Main nav */}
+      <nav
+        className={[
+          "border-b border-black/10 transition-colors duration-300",
+          isScrolled ? "bg-white/80 backdrop-blur" : "bg-white/30 backdrop-blur",
+        ].join(" ")}
+      >
+        <div className="container-pad flex h-20 items-center justify-between">
+          {/* Brand */}
+          <Link
+            to="/"
+            className="flex items-center gap-3"
+            onClick={() => setOpen(false)}
+          >
+            <div
+              className={[
+                "rounded-2xl border border-black/10 bg-white shadow-soft",
+                "transition-transform duration-300",
+                isScrolled ? "p-2" : "p-2.5",
+              ].join(" ")}
+            >
+              <img
+                src={MainLogo}
+                alt="Grand Terrace"
+                className="h-12 w-auto object-contain md:h-14"
+                loading="eager"
               />
+            </div>
+
+            <div className="hidden sm:block leading-tight">
+              <div className="font-display text-lg md:text-xl">Grand Terrace</div>
+              <div className="text-[11px] tracking-[0.20em] uppercase text-black/55">
+                Dining · Bars · Experiences
+              </div>
             </div>
           </Link>
 
-          <div className={`hidden lg:flex items-center space-x-12 text-[12px] uppercase tracking-[0.4em] font-bold ${
-            isScrolled ? 'text-stone-900' : 'text-white'
-          }`}>
-            <Link to="/" className="hover:text-amber-600 transition-colors relative group">
-              Home
-              <span className="absolute -bottom-2 left-0 w-0 h-[1px] bg-amber-600 transition-all group-hover:w-full"></span>
-            </Link>
-            <Link to="/dining" className="hover:text-amber-600 transition-colors relative group">
-              Dining
-              <span className="absolute -bottom-2 left-0 w-0 h-[1px] bg-amber-600 transition-all group-hover:w-full"></span>
-            </Link>
-            <Link to="/about" className="hover:text-amber-600 transition-colors relative group">
-              About
-              <span className="absolute -bottom-2 left-0 w-0 h-[1px] bg-amber-600 transition-all group-hover:w-full"></span>
-            </Link>
-            <Link to="/contact" className="hover:text-amber-600 transition-colors relative group">
-              Contact
-              <span className="absolute -bottom-2 left-0 w-0 h-[1px] bg-amber-600 transition-all group-hover:w-full"></span>
-            </Link>
+          {/* Desktop links */}
+          <div className="hidden lg:flex items-center gap-10">
+            {NAV.map((n) => (
+              <NavLink
+                key={n.to}
+                to={n.to}
+                className={({ isActive }) =>
+                  [
+                    "text-[11px] uppercase font-medium tracking-[0.32em] transition-colors",
+                    isActive ? "text-black" : "text-black/70 hover:text-black",
+                  ].join(" ")
+                }
+              >
+                {n.label}
+              </NavLink>
+            ))}
           </div>
 
-          <div className="flex items-center space-x-6">
-             <button className={`hidden sm:block text-[11px] uppercase tracking-[0.2em] font-bold ${isScrolled ? 'text-stone-800' : 'text-white'}`}>
-                EN / LK
-             </button>
-             <button className="bg-amber-700 hover:bg-stone-900 text-white px-8 py-4 text-[11px] uppercase tracking-[0.3em] font-bold transition-all shadow-lg transform hover:-translate-y-1">
-                Book Now
-             </button>
+          {/* Right actions */}
+          <div className="flex items-center gap-3">
+            <button
+              className="hidden sm:inline-flex rounded-2xl border border-black/10 bg-white/70 px-4 py-2 text-[11px] uppercase tracking-[0.22em] text-black/70 hover:bg-white transition"
+              type="button"
+            >
+              EN / LK
+            </button>
+
+            <button
+              className="hidden sm:inline-flex rounded-2xl bg-black px-5 py-3 text-[11px] uppercase tracking-[0.28em] text-white hover:bg-black/90 transition"
+              type="button"
+              onClick={() => {
+                // Replace with your modal or WhatsApp link later
+                window.location.href = "mailto:reservations@example.com?subject=Grand%20Terrace%20Booking";
+              }}
+            >
+              Book Now
+            </button>
+
+            {/* Mobile menu button */}
+            <button
+              className="inline-flex lg:hidden rounded-2xl border border-black/10 bg-white/70 p-3 hover:bg-white transition"
+              onClick={() => setOpen((v) => !v)}
+              aria-label="Open menu"
+              type="button"
+            >
+              {open ? <X size={18} /> : <Menu size={18} />}
+            </button>
           </div>
         </div>
+
+        {/* Mobile menu */}
+        <AnimatePresence>
+          {open && (
+            <motion.div
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: "auto", opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              className="lg:hidden border-t border-black/10 bg-white/90 backdrop-blur"
+            >
+              <div className="container-pad py-5 grid gap-2">
+                {NAV.map((n) => (
+                  <NavLink
+                    key={n.to}
+                    to={n.to}
+                    onClick={() => setOpen(false)}
+                    className={({ isActive }) =>
+                      [
+                        "rounded-2xl border border-black/10 px-4 py-3 text-sm transition",
+                        isActive ? "bg-black text-white" : "bg-white hover:bg-black/5",
+                      ].join(" ")
+                    }
+                  >
+                    {n.label}
+                  </NavLink>
+                ))}
+
+                <button
+                  className="mt-2 rounded-2xl bg-black px-4 py-3 text-sm text-white hover:bg-black/90 transition"
+                  onClick={() => {
+                    setOpen(false);
+                    window.location.href =
+                      "mailto:reservations@example.com?subject=Grand%20Terrace%20Booking";
+                  }}
+                  type="button"
+                >
+                  Book Now
+                </button>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </nav>
     </header>
   );
-};
-
-export default Navbar;
+}
