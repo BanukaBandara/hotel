@@ -1,29 +1,32 @@
 import React from 'react';
-import { motion } from 'framer-motion';
 import { Facebook, Instagram, Twitter, Linkedin, Mail, Phone, MapPin, Send, ArrowUpRight } from 'lucide-react';
 
 const Footer = () => {
   return (
-    <footer className="bg-[#1A120B] text-[#E6D5C3] pt-24 pb-12 px-6 font-sans border-t border-[#6F4E37]/20">
-      <div className="max-w-7xl mx-auto">
+    <footer className="bg-[#0c0a09] text-[#E6D5C3] pt-24 pb-12 px-6 font-sans border-t border-white/5 relative overflow-hidden">
+      
+      {/* Background Subtle Glow */}
+      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#D4A574]/5 blur-[150px] rounded-full -z-10"></div>
+
+      <div className="max-w-[1600px] mx-auto">
         
         {/* --- TOP SECTION: BRANDING & NEWSLETTER --- */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 pb-20">
           
-          {/* Brand Identity (4 Columns) */}
-          <div className="lg:col-span-5 space-y-8">
-            <div className="space-y-4">
-              <h2 className="text-4xl font-serif text-white italic tracking-tighter">
-                Infinity <span className="text-[#C5A059]">Dining</span>
+          {/* Brand Identity */}
+          <div className="lg:col-span-5 space-y-10">
+            <div className="space-y-6">
+              <h2 className="text-4xl font-serif text-white tracking-tighter">
+                GRAND <span className="text-[#D4A574] italic">TERRACE</span>
               </h2>
-              <p className="text-sm leading-relaxed max-w-sm text-stone-400 font-light">
-                Sri Lanka's premier culinary escape. We curate experiences where the deep essence 
-                of Roasted Cocoa meets the precision of modern luxury.
+              <p className="text-[13px] leading-relaxed max-w-sm text-stone-400 font-light tracking-wide">
+                Sri Lanka's premier heritage escape. Where the deep essence 
+                of Roasted Cocoa meets the precision of modern luxury. Experience excellence in every stay.
               </p>
             </div>
 
-            {/* Social Media - Minimalist Style */}
-            <div className="flex space-x-4">
+            {/* Social Media - Gold Circle Style */}
+            <div className="flex space-x-5">
               {[
                 { Icon: Instagram, link: "#" },
                 { Icon: Facebook, link: "#" },
@@ -33,96 +36,101 @@ const Footer = () => {
                 <a 
                   key={index} 
                   href={social.link} 
-                  className="w-10 h-10 flex items-center justify-center border border-[#6F4E37] rounded-full text-[#C5A059] hover:bg-[#C5A059] hover:text-[#1A120B] transition-all duration-500"
+                  className="w-11 h-11 flex items-center justify-center border border-[#D4A574]/20 rounded-full text-[#D4A574] hover:bg-[#D4A574] hover:text-black transition-all duration-500 hover:-translate-y-1"
                 >
-                  <social.Icon size={16} />
+                  <social.Icon size={18} />
                 </a>
               ))}
             </div>
           </div>
 
-          {/* Quick Navigation (4 Columns) */}
+          {/* Quick Navigation */}
           <div className="lg:col-span-3 grid grid-cols-2 gap-8">
             <div>
-              <h4 className="text-[#C5A059] uppercase tracking-[0.3em] text-[10px] font-bold mb-8">Discover</h4>
-              <ul className="space-y-4 text-[13px] font-light">
-                <li><a href="/" className="hover:text-white transition-colors flex items-center gap-1 group">Home <ArrowUpRight size={12} className="opacity-0 group-hover:opacity-100 transition-all"/></a></li>
-                <li><a href="/dining" className="hover:text-white transition-colors flex items-center gap-1 group">Our Dining <ArrowUpRight size={12} className="opacity-0 group-hover:opacity-100 transition-all"/></a></li>
-                <li><a href="#" className="hover:text-white transition-colors flex items-center gap-1 group">Private Events <ArrowUpRight size={12} className="opacity-0 group-hover:opacity-100 transition-all"/></a></li>
-                <li><a href="#" className="hover:text-white transition-colors flex items-center gap-1 group">Gift Cards</a></li>
+              <h4 className="text-[#D4A574] uppercase tracking-[0.4em] text-[10px] font-black mb-10">Discover</h4>
+              <ul className="space-y-5 text-[12px] uppercase tracking-widest font-medium">
+                <li><a href="/" className="text-stone-400 hover:text-[#D4A574] transition-colors flex items-center gap-2 group">Home <ArrowUpRight size={12} className="opacity-0 group-hover:opacity-100 transition-all -translate-x-2 group-hover:translate-x-0"/></a></li>
+                <li><a href="/dining" className="text-stone-400 hover:text-[#D4A574] transition-colors flex items-center gap-2 group">Dining <ArrowUpRight size={12} className="opacity-0 group-hover:opacity-100 transition-all -translate-x-2 group-hover:translate-x-0"/></a></li>
+                <li><a href="#" className="text-stone-400 hover:text-[#D4A574] transition-colors flex items-center gap-2 group">Suites <ArrowUpRight size={12} className="opacity-0 group-hover:opacity-100 transition-all -translate-x-2 group-hover:translate-x-0"/></a></li>
+                <li><a href="#" className="text-stone-400 hover:text-[#D4A574] transition-colors flex items-center gap-2 group">Events <ArrowUpRight size={12} className="opacity-0 group-hover:opacity-100 transition-all -translate-x-2 group-hover:translate-x-0"/></a></li>
               </ul>
             </div>
             <div>
-              <h4 className="text-[#C5A059] uppercase tracking-[0.3em] text-[10px] font-bold mb-8">Service</h4>
-              <ul className="space-y-4 text-[13px] font-light">
-                <li><a href="#" className="hover:text-white transition-colors">Reservations</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Contact Us</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Privacy Policy</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Terms</a></li>
+              <h4 className="text-[#D4A574] uppercase tracking-[0.4em] text-[10px] font-black mb-10">Legal</h4>
+              <ul className="space-y-5 text-[12px] uppercase tracking-widest font-medium">
+                <li><a href="#" className="text-stone-400 hover:text-white transition-colors">Reservations</a></li>
+                <li><a href="#" className="text-stone-400 hover:text-white transition-colors">Privacy Policy</a></li>
+                <li><a href="#" className="text-stone-400 hover:text-white transition-colors">Terms & Cond</a></li>
+                <li><a href="#" className="text-stone-400 hover:text-white transition-colors">Cookies</a></li>
               </ul>
             </div>
           </div>
 
-          {/* Newsletter (4 Columns) */}
-          <div className="lg:col-span-4 space-y-6 bg-[#2C1E16] p-8 rounded-sm border border-[#6F4E37]/30">
-            <h4 className="text-white uppercase tracking-widest text-xs font-bold">The Inner Circle</h4>
-            <p className="text-xs text-stone-400 font-light leading-relaxed">
-              Join our mailing list for exclusive tasting invites and seasonal cocoa-inspired menus.
+          {/* Newsletter - Premium Card Style */}
+          <div className="lg:col-span-4 bg-stone-900/40 p-10 rounded-2xl border border-white/5 backdrop-blur-sm">
+            <h4 className="text-white uppercase tracking-[0.3em] text-xs font-black mb-4">The Inner Circle</h4>
+            <p className="text-[12px] text-stone-400 font-light leading-relaxed mb-8">
+              Subscribe to receive exclusive invitations for heritage tasting events and seasonal offers.
             </p>
             <div className="relative group">
               <input 
                 type="email" 
-                placeholder="Email Address" 
-                className="w-full bg-[#1A120B] border border-[#6F4E37] px-4 py-4 text-xs text-white focus:outline-none focus:border-[#C5A059] transition-all"
+                placeholder="EMAIL ADDRESS" 
+                className="w-full bg-stone-950 border border-white/10 px-6 py-5 text-[10px] tracking-widest text-white focus:outline-none focus:border-[#D4A574]/50 transition-all rounded-xl"
               />
-              <button className="absolute right-2 top-1/2 -translate-y-1/2 p-2 bg-[#C5A059] text-[#1A120B] hover:bg-white transition-all">
-                <Send size={16} />
+              <button className="absolute right-2 top-1/2 -translate-y-1/2 w-12 h-12 flex items-center justify-center bg-[#D4A574] text-black rounded-lg hover:bg-white transition-all duration-300">
+                <Send size={18} />
               </button>
             </div>
           </div>
         </div>
 
-        {/* --- MIDDLE SECTION: INFO STRIPS --- */}
-        <div className="py-12 border-y border-[#6F4E37]/20 grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div className="flex items-center gap-5 group">
-            <div className="w-12 h-12 flex items-center justify-center bg-[#2C1E16] rounded-full text-[#C5A059] group-hover:scale-110 transition-transform">
-                <MapPin size={20} />
+        {/* --- MIDDLE SECTION: LUXURY INFO STRIPS --- */}
+        <div className="py-16 border-y border-white/5 grid grid-cols-1 md:grid-cols-3 gap-12">
+          <div className="flex items-center gap-6 group cursor-pointer">
+            <div className="w-14 h-14 flex items-center justify-center bg-stone-900 rounded-2xl text-[#D4A574] border border-white/5 group-hover:border-[#D4A574]/50 transition-all duration-500">
+                <MapPin size={22} />
             </div>
             <div className="space-y-1">
-                <p className="text-[10px] uppercase tracking-widest text-stone-500">Location</p>
-                <p className="text-sm text-white font-light">02, York Street, Colombo, Sri Lanka</p>
+                <p className="text-[10px] uppercase tracking-[0.3em] text-stone-500 font-bold">Visit Us</p>
+                <p className="text-[13px] text-white font-medium tracking-wide">02, York Street, Colombo, Sri Lanka</p>
             </div>
           </div>
           
-          <div className="flex items-center gap-5 group">
-            <div className="w-12 h-12 flex items-center justify-center bg-[#2C1E16] rounded-full text-[#C5A059] group-hover:scale-110 transition-transform">
-                <Phone size={20} />
+          <div className="flex items-center gap-6 group cursor-pointer">
+            <div className="w-14 h-14 flex items-center justify-center bg-stone-900 rounded-2xl text-[#D4A574] border border-white/5 group-hover:border-[#D4A574]/50 transition-all duration-500">
+                <Phone size={22} />
             </div>
             <div className="space-y-1">
-                <p className="text-[10px] uppercase tracking-widest text-stone-500">Inquiries</p>
-                <p className="text-sm text-white font-light">+94 11 234 5678</p>
+                <p className="text-[10px] uppercase tracking-[0.3em] text-stone-500 font-bold">Inquiries</p>
+                <p className="text-[13px] text-white font-medium tracking-wide">+94 11 234 5678</p>
             </div>
           </div>
 
-          <div className="flex items-center gap-5 group">
-            <div className="w-12 h-12 flex items-center justify-center bg-[#2C1E16] rounded-full text-[#C5A059] group-hover:scale-110 transition-transform">
-                <Mail size={20} />
+          <div className="flex items-center gap-6 group cursor-pointer">
+            <div className="w-14 h-14 flex items-center justify-center bg-stone-900 rounded-2xl text-[#D4A574] border border-white/5 group-hover:border-[#D4A574]/50 transition-all duration-500">
+                <Mail size={22} />
             </div>
             <div className="space-y-1">
-                <p className="text-[10px] uppercase tracking-widest text-stone-500">Concierge</p>
-                <p className="text-sm text-white font-light">infinityresturantsm@gmail.com</p>
+                <p className="text-[10px] uppercase tracking-[0.3em] text-stone-500 font-bold">Concierge</p>
+                <p className="text-[13px] text-white font-medium tracking-wide">hello@grandterrace.com</p>
             </div>
           </div>
         </div>
 
         {/* --- BOTTOM SECTION: COPYRIGHT --- */}
-        <div className="pt-10 flex flex-col md:flex-row justify-between items-center gap-6">
-          <p className="text-[10px] uppercase tracking-[0.4em] text-stone-500 italic">
-            © 2026 Infinity Dining. All Rights Reserved.
+        <div className="pt-12 flex flex-col md:flex-row justify-between items-center gap-8">
+          <p className="text-[9px] uppercase tracking-[0.5em] text-stone-600">
+            © 2026 Grand Terrace Hotels. Crafted for Excellence.
           </p>
-          <div className="flex items-center gap-2">
-            <span className="text-[10px] uppercase tracking-[0.2em] text-stone-600">Architected by</span>
-            <span className="text-[10px] uppercase tracking-[0.2em] text-[#C5A059] font-bold">B & D Solutions</span>
+          
+          {/* Brand/Developer Credit */}
+          <div className="flex items-center gap-4 grayscale opacity-50 hover:grayscale-0 hover:opacity-100 transition-all duration-700">
+            <span className="text-[9px] uppercase tracking-[0.3em] text-stone-500">Designed by</span>
+            <div className="flex items-center gap-1">
+                <div className="w-1 h-1 bg-[#D4A574] rounded-full"></div>
+                <span className="text-[10px] uppercase tracking-[0.2em] text-[#D4A574] font-black">B & D Solutions</span>
+            </div>
           </div>
         </div>
       </div>

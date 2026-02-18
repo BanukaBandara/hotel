@@ -1,188 +1,100 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
-import { Menu, X } from "lucide-react";
+import { Menu, X, ChevronDown, Globe } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 
 import MainLogo from "../assets/grandterrace-logo.jpeg";
-import SubLogosStrip from "../assets/grandterrace-logos-strip.jpeg";
 
-const NAV = [
+const NAV_LINKS = [
   { to: "/", label: "Home" },
-  { to: "/dining", label: "Lounge" },
-  { to: "/about", label: "About" },
-  { to: "/contact", label: "Contact" },
+  { to: "/dining", label: "Dining" },
+  { to: "/events", label: "Weddings & Events" },
+  { to: "/About", label: "About" },
+  { to: "/Contact", label: "Contact" },
+  { to: "/gallery", label: "Gallery" },
 ];
 
 export default function Navbar() {
-  const [isScrolled, setIsScrolled] = React.useState(false);
-  const [open, setOpen] = React.useState(false);
-
-  React.useEffect(() => {
-    const onScroll = () => setIsScrolled(window.scrollY > 16);
-    onScroll();
-    window.addEventListener("scroll", onScroll);
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
-  React.useEffect(() => {
-    const onKey = (e) => e.key === "Escape" && setOpen(false);
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, []);
+  const [open, setOpen] = useState(false);
 
   return (
-    <header className="fixed inset-x-0 top-0 z-[100]">
-      {/* Top subtle info bar (desktop only) */}
-      <div
-        className={[
-          "hidden md:block border-b border-black/10 bg-white/80 backdrop-blur",
-          "transition-all duration-300",
-          isScrolled ? "h-0 opacity-0 overflow-hidden" : "h-12 opacity-100",
-        ].join(" ")}
-      >
-        <div className="container-pad flex h-12 items-center justify-between text-[10px] tracking-[0.28em] uppercase text-black/55">
-          <div className="hidden lg:block">Part of Grand Terrace Hotel</div>
-
-          <img
-            src={SubLogosStrip}
-            alt="Grand Terrace Sub Brands"
-            className="h-7 w-auto object-contain opacity-80 hover:opacity-100 transition"
-            loading="eager"
-          />
-
-          <div className="hidden lg:block">Colombo, Sri Lanka</div>
+    <header className="fixed inset-x-0 top-0 z-[100] w-full shadow-2xl">
+      {/* --- TOP LAYER (Fixed Dark Bar) --- */}
+      <div className="bg-stone-950 border-b border-white/5 py-2 px-6 hidden lg:block">
+        <div className="max-w-[1600px] mx-auto flex justify-between items-center">
+          <div className="flex items-center gap-6 text-[9px] tracking-[0.3em] text-stone-400 font-bold uppercase">
+            <span className="cursor-pointer hover:text-[#D4A574] transition">Grand Terrace Hotels & Resorts</span>
+            <span className="text-stone-800">|</span>
+            <span className="cursor-pointer hover:text-[#D4A574] transition italic font-serif lowercase text-base tracking-normal">Heritage Excellence</span>
+          </div>
+          
+          <div className="flex items-center gap-8">
+            <div className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest cursor-pointer text-stone-300 hover:text-[#D4A574]">
+              <Globe size={12} className="text-[#D4A574]" /> English <ChevronDown size={12} />
+            </div>
+            <button className="text-[10px] font-bold uppercase tracking-widest border-b border-[#D4A574]/30 pb-0.5 text-stone-300 hover:text-[#D4A574] transition">
+              Manage Bookings
+            </button>
+            <button className="bg-[#D4A574] text-stone-950 px-6 py-2 rounded-tr-xl rounded-bl-xl text-[10px] font-black uppercase tracking-[0.2em] hover:bg-white transition">
+              Book Now
+            </button>
+          </div>
         </div>
       </div>
 
-      {/* Main nav */}
-      <nav
-        className={[
-          "border-b border-black/10 transition-colors duration-300",
-          isScrolled ? "bg-white/80 backdrop-blur" : "bg-white/30 backdrop-blur",
-        ].join(" ")}
-      >
-        <div className="container-pad flex h-20 items-center justify-between">
-          {/* Brand */}
-          <Link
-            to="/"
-            className="flex items-center gap-3"
-            onClick={() => setOpen(false)}
-          >
-            <div
-              className={[
-                "rounded-2xl border border-black/10 bg-white shadow-soft",
-                "transition-transform duration-300",
-                isScrolled ? "p-2" : "p-2.5",
-              ].join(" ")}
-            >
-              <img
-                src={MainLogo}
-                alt="Grand Terrace"
-                className="h-12 w-auto object-contain md:h-14"
-                loading="eager"
-              />
-            </div>
-
-            <div className="hidden sm:block leading-tight">
-              <div className="font-display text-lg md:text-xl">Grand Terrace</div>
-              <div className="text-[11px] tracking-[0.20em] uppercase text-black/55">
-                Dining · Bars · Experiences
-              </div>
-            </div>
+      {/* --- MIDDLE LAYER (Main Nav - Fixed) --- */}
+      <div className="bg-stone-950/95 backdrop-blur-md border-b border-white/5 py-4 px-6">
+        <div className="max-w-[1600px] mx-auto flex flex-col items-center">
+          <Link to="/" className="mb-4">
+            <img src={MainLogo} alt="Grand Terrace" className="h-14 w-auto object-contain brightness-110" />
           </Link>
 
-          {/* Desktop links */}
-          <div className="hidden lg:flex items-center gap-10">
-            {NAV.map((n) => (
-              <NavLink
-                key={n.to}
-                to={n.to}
-                className={({ isActive }) =>
-                  [
-                    "text-[11px] uppercase font-medium tracking-[0.32em] transition-colors",
-                    isActive ? "text-black" : "text-black/70 hover:text-black",
-                  ].join(" ")
-                }
-              >
-                {n.label}
-              </NavLink>
-            ))}
-          </div>
-
-          {/* Right actions */}
-          <div className="flex items-center gap-3">
-            <button
-              className="hidden sm:inline-flex rounded-2xl border border-black/10 bg-white/70 px-4 py-2 text-[11px] uppercase tracking-[0.22em] text-black/70 hover:bg-white transition"
-              type="button"
-            >
-              EN / LK
-            </button>
-
-            <button
-              className="hidden sm:inline-flex rounded-2xl bg-black px-5 py-3 text-[11px] uppercase tracking-[0.28em] text-white hover:bg-black/90 transition"
-              type="button"
-              onClick={() => {
-                // Replace with your modal or WhatsApp link later
-                window.location.href = "mailto:infinityresturantsm@gmail.com?subject=Grand%20Terrace%20Booking";
-              }}
-            >
-              Book Now
-            </button>
-
-            {/* Mobile menu button */}
-            <button
-              className="inline-flex lg:hidden rounded-2xl border border-black/10 bg-white/70 p-3 hover:bg-white transition"
-              onClick={() => setOpen((v) => !v)}
-              aria-label="Open menu"
-              type="button"
-            >
-              {open ? <X size={18} /> : <Menu size={18} />}
-            </button>
-          </div>
-        </div>
-
-        {/* Mobile menu */}
-        <AnimatePresence>
-          {open && (
-            <motion.div
-              initial={{ height: 0, opacity: 0 }}
-              animate={{ height: "auto", opacity: 1 }}
-              exit={{ height: 0, opacity: 0 }}
-              className="lg:hidden border-t border-black/10 bg-white/90 backdrop-blur"
-            >
-              <div className="container-pad py-5 grid gap-2">
-                {NAV.map((n) => (
-                  <NavLink
-                    key={n.to}
-                    to={n.to}
-                    onClick={() => setOpen(false)}
-                    className={({ isActive }) =>
-                      [
-                        "rounded-2xl border border-black/10 px-4 py-3 text-sm transition",
-                        isActive ? "bg-black text-white" : "bg-white hover:bg-black/5",
-                      ].join(" ")
-                    }
-                  >
-                    {n.label}
-                  </NavLink>
-                ))}
-
-                <button
-                  className="mt-2 rounded-2xl bg-black px-4 py-3 text-sm text-white hover:bg-black/90 transition"
-                  onClick={() => {
-                    setOpen(false);
-                    window.location.href =
-                      "infinityresturantsm@gmail.com?subject=Grand%20Terrace%20Booking";
-                  }}
-                  type="button"
+          <nav className="hidden lg:flex items-center gap-10">
+            {NAV_LINKS.map((link, idx) => (
+              <React.Fragment key={link.to}>
+                <NavLink
+                  to={link.to}
+                  className={({ isActive }) => 
+                    `text-[10.5px] font-bold uppercase tracking-[0.25em] transition-all duration-300 ${
+                      isActive ? "text-[#D4A574]" : "text-stone-300 hover:text-white"
+                    }`
+                  }
                 >
-                  Book Now
-                </button>
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </nav>
+                  {link.label}
+                </NavLink>
+                {idx !== NAV_LINKS.length - 1 && (
+                  <span className="text-[#D4A574]/40 text-[8px]">✦</span>
+                )}
+              </React.Fragment>
+            ))}
+          </nav>
+
+          <button className="lg:hidden absolute left-6 top-1/2 -translate-y-1/2 text-white" onClick={() => setOpen(!open)}>
+            {open ? <X size={24} /> : <Menu size={24} />}
+          </button>
+        </div>
+      </div>
+
+      {/* --- BOTTOM LAYER (Booking Bar - Fixed) --- */}
+      <div className="hidden lg:block bg-[#0c0a09] h-16 border-b border-white/5">
+        <div className="max-w-[1600px] mx-auto h-full flex items-center">
+          <div className="flex-1 flex border-r border-white/5 h-full items-center px-10 text-[10px] uppercase tracking-[0.2em] text-stone-400 font-bold">
+            Grand Terrace <span className="text-[#D4A574] ml-2">Colombo</span>
+          </div>
+          <div className="flex-1 flex border-r border-white/5 h-full items-center px-10 text-[13px] text-white font-bold tracking-wide">
+            19 Feb - 20 Feb, 2026
+          </div>
+          <div className="flex-1 flex border-r border-white/5 h-full items-center px-10 text-[13px] text-white font-bold tracking-wide">
+            01 Rooms, 01 Adults
+          </div>
+          <div className="flex-1 flex items-center px-10 text-[10px] uppercase tracking-widest text-stone-500 font-bold">
+            Promo Code
+          </div>
+          <button className="bg-[#D4A574] text-stone-950 h-full px-12 text-[11px] font-black uppercase tracking-[0.25em] hover:bg-white transition-all">
+            Check Availability
+          </button>
+        </div>
+      </div>
     </header>
   );
 }
