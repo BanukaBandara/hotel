@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 import { ChevronRight, Play, Star, Award, Clock, MapPin, Phone, Mail, Calendar, Sparkles, Users, Coffee, Heart, GlassWater, Mic2, Beer, Wind, ArrowRight } from 'lucide-react';
+import baImg from "../assets/ba.png";
+import kerImg from "../assets/ker.png";
+import tapImg from "../assets/tap.png";
+import nigImg from "../assets/nig.png";
 
 const Home = () => {
   const { scrollY } = useScroll();
@@ -381,28 +385,28 @@ const Home = () => {
           { 
             title: "GOVERNOR'S BAR", 
             subtitle: "The Art of Mixology",
-            img: "src/assets/ba.png",
+            img: baImg,
             icon: <GlassWater size={20} strokeWidth={1.5} />,
             accent: "bg-[#3E2723]" 
           },
           { 
             title: "KARAOKE SUITE", 
             subtitle: "Private Singing Experience",
-            img: "src/assets/ker.png",
+            img: kerImg,
             icon: <Mic2 size={20} strokeWidth={1.5} />,
             accent: "bg-[#5D4037]"
           },
           { 
             title: "TAP BAR", 
             subtitle: "Elite Rooftop Lounge",
-            img: "src/assets/tap.png",
+            img: tapImg,
             icon: <Beer size={20} strokeWidth={1.5} />,
             accent: "bg-[#3E2723]"
           },
           { 
             title: "ISTANBUL NIGHTS", 
             subtitle: "Premium Shisha Veranda",
-            img: "src/assets/nig.png",
+            img: nigImg,
             icon: <Wind size={20} strokeWidth={1.5} />,
             accent: "bg-[#5D4037]"
           },
