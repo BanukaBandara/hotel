@@ -8,7 +8,7 @@ import SubLogosStrip from "../assets/grandterrace-logos-strip.jpeg";
 
 const NAV = [
   { to: "/", label: "Home" },
-  { to: "/dining", label: "Dining" },
+  { to: "/dining", label: "Lounge" },
   { to: "/about", label: "About" },
   { to: "/contact", label: "Contact" },
 ];
