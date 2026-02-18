@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
-import { ChevronRight, Play, Star, Award, Clock, MapPin, Phone, Mail, Calendar, ArrowRight, Sparkles, Users, Coffee, Heart } from 'lucide-react';
+import { ChevronRight, Play, Star, Award, Clock, MapPin, Phone, Mail, Calendar, Sparkles, Users, Coffee, Heart, GlassWater, Mic2, Beer, Wind, ArrowRight } from 'lucide-react';
 
 const Home = () => {
   const { scrollY } = useScroll();
@@ -376,101 +376,99 @@ const Home = () => {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {[
-              { 
-                title: "Fine Dining", 
-                subtitle: "Michelin-Inspired",
-                img: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?q=80&w=600",
-                icon: <Star size={22} />,
-                color: "from-[#6F4E37]"
-              },
-              { 
-                title: "Private Events", 
-                subtitle: "Exclusive Venues",
-                img: "https://images.unsplash.com/photo-1631049307264-da0ec9d70304?q=80&w=600",
-                icon: <Award size={22} />,
-                color: "from-[#8B6239]"
-              },
-              { 
-                title: "Rooftop Bar", 
-                subtitle: "Skyline Views",
-                img: "https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=600",
-                icon: <Clock size={22} />,
-                color: "from-[#6F4E37]"
-              },
-              { 
-                title: "Culinary Classes", 
-                subtitle: "Learn & Create",
-                img: "https://images.unsplash.com/photo-1540555700478-4be289fbecef?q=80&w=600",
-                icon: <Coffee size={22} />,
-                color: "from-[#8B6239]"
-              },
-            ].map((item, i) => (
-              <motion.div 
-                key={i}
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.15, duration: 0.6 }}
-                onHoverStart={() => setActiveExperience(i)}
-                onHoverEnd={() => setActiveExperience(-1)}
-                className="relative group h-[550px] overflow-hidden cursor-pointer bg-white shadow-xl border-2 border-stone-100 hover:border-[#D4A574] transition-all duration-500"
-              >
-                <div className="overflow-hidden h-[350px] relative">
-                  <motion.img 
-                    src={item.img} 
-                    animate={{ scale: activeExperience === i ? 1.15 : 1 }}
-                    transition={{ duration: 0.7 }}
-                    className="w-full h-full object-cover"
-                    alt={item.title} 
-                  />
-                  {/* Gradient Overlay */}
-                  <div className={`absolute inset-0 bg-gradient-to-b ${item.color} via-transparent to-transparent opacity-0 group-hover:opacity-60 transition-opacity duration-500`}></div>
-                  
-                  {/* Floating Icon */}
-                  <motion.div
-                    initial={{ y: 20, opacity: 0 }}
-                    animate={{ 
-                      y: activeExperience === i ? 0 : 20,
-                      opacity: activeExperience === i ? 1 : 0
-                    }}
-                    className="absolute top-6 right-6 p-4 bg-white/95 backdrop-blur-sm rounded-full text-[#6F4E37] shadow-xl"
-                  >
-                    {item.icon}
-                  </motion.div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        {[
+          { 
+            title: "GOVERNOR'S BAR", 
+            subtitle: "The Art of Mixology",
+            img: "src/assets/ba.png",
+            icon: <GlassWater size={20} strokeWidth={1.5} />,
+            accent: "bg-[#3E2723]" 
+          },
+          { 
+            title: "KARAOKE SUITE", 
+            subtitle: "Private Singing Experience",
+            img: "src/assets/ker.png",
+            icon: <Mic2 size={20} strokeWidth={1.5} />,
+            accent: "bg-[#5D4037]"
+          },
+          { 
+            title: "TAP BAR", 
+            subtitle: "Elite Rooftop Lounge",
+            img: "src/assets/tap.png",
+            icon: <Beer size={20} strokeWidth={1.5} />,
+            accent: "bg-[#3E2723]"
+          },
+          { 
+            title: "ISTANBUL NIGHTS", 
+            subtitle: "Premium Shisha Veranda",
+            img: "src/assets/nig.png",
+            icon: <Wind size={20} strokeWidth={1.5} />,
+            accent: "bg-[#5D4037]"
+          },
+        ].map((item, i) => (
+          <motion.div 
+            key={i}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: i * 0.1, duration: 0.8 }}
+            onHoverStart={() => setActiveExperience(i)}
+            onHoverEnd={() => setActiveExperience(-1)}
+            className="relative group h-[580px] overflow-hidden bg-white rounded-2xl shadow-[0_10px_40px_rgba(62,39,35,0.05)] border border-stone-100 hover:border-[#D4A574]/30 transition-all duration-700"
+          >
+            {/* Visual Area */}
+            <div className="overflow-hidden h-[360px] relative">
+              <motion.img 
+                src={item.img} 
+                animate={{ scale: activeExperience === i ? 1.1 : 1.05 }}
+                transition={{ duration: 1.5, ease: "easeOut" }}
+                className="w-full h-full object-cover"
+                alt={item.title} 
+              />
+              
+              {/* Deep Cocoa Gradient Overlay */}
+              <div className="absolute inset-0 bg-gradient-to-t from-[#1A0F0E]/80 via-transparent to-transparent opacity-60 group-hover:opacity-40 transition-opacity duration-700" />
+            </div>
+            
+            {/* Content Area */}
+            <div className="p-8 bg-white relative">
+              <div className="flex items-center gap-4 mb-5">
+                {/* Icon Container with Roasted Cocoa Theme */}
+                <div className={`p-3 rounded-xl text-white shadow-lg ${item.accent} group-hover:bg-[#D4A574] transition-colors duration-500`}>
+                  {item.icon}
                 </div>
+                <div className="h-[1px] flex-1 bg-stone-100 group-hover:bg-[#D4A574]/30 transition-colors" />
+              </div>
+              
+              <h5 className="text-2xl font-serif tracking-tight text-[#3E2723] mb-2 group-hover:text-[#D4A574] transition-colors duration-500">
+                {item.title}
+              </h5>
+              
+              <p className="text-[11px] font-bold text-stone-400 mb-8 uppercase tracking-[0.15em]">
+                {item.subtitle}
+              </p>
+              
+              <div className="flex items-center justify-between">
+                <motion.div
+                  animate={{ x: activeExperience === i ? 5 : 0 }}
+                  className="flex items-center gap-3 cursor-pointer"
+                >
+                  <span className="text-[10px] uppercase tracking-[0.2em] font-black text-[#3E2723]">Discover</span>
+                  <ArrowRight size={14} className="text-[#D4A574]" />
+                </motion.div>
                 
-                <div className="p-8 relative">
-                  <div className="flex items-center gap-3 mb-4">
-                    <div className="p-2 bg-gradient-to-br from-[#F5E6D3] to-[#E8D4BF] rounded-lg text-[#6F4E37]">
-                      {item.icon}
-                    </div>
-                    <div className="h-px flex-1 bg-gradient-to-r from-[#6F4E37]/30 to-transparent"></div>
-                  </div>
-                  
-                  <h5 className="text-2xl font-serif text-stone-900 mb-2 group-hover:text-[#6F4E37] transition-colors">
-                    {item.title}
-                  </h5>
-                  <p className="text-sm text-stone-500 mb-6 uppercase tracking-wider">
-                    {item.subtitle}
-                  </p>
-                  
-                  <motion.button 
-                    animate={{ 
-                      x: activeExperience === i ? 5 : 0
-                    }}
-                    className="flex items-center gap-2 text-xs uppercase tracking-widest font-bold text-[#6F4E37] group-hover:text-[#8B6239] transition-colors"
-                  >
-                    Explore <ArrowRight size={14} />
-                  </motion.button>
-                </div>
+                <span className="text-stone-100 font-serif text-4xl absolute bottom-6 right-8 pointer-events-none group-hover:text-stone-200 transition-colors">
+                  0{i + 1}
+                </span>
+              </div>
+      </div>
 
-                {/* Corner Accent */}
-                <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-[#6F4E37]/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
-              </motion.div>
-            ))}
-          </div>
+      {/* Luxury Bottom Accent Line */}
+      <div className="absolute bottom-0 left-0 w-full h-[4px] bg-[#D4A574] scale-x-0 group-hover:scale-x-100 transition-transform duration-700 origin-left" />
+    </motion.div>
+  ))}
+</div>
         </div>
       </section>
 

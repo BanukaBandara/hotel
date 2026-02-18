@@ -282,48 +282,6 @@ export default function About() {
         </div>
       </section>
 
-      {/* Team Section */}
-      <section className="py-24 px-6 bg-stone-50">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <span className="text-[#6F4E37] uppercase tracking-[0.3em] text-xs font-bold mb-4 block">Our Team</span>
-            <h2 className="text-4xl md:text-5xl font-serif text-stone-900 mb-6">Meet the Masters</h2>
-            <p className="text-stone-600 max-w-2xl mx-auto">
-              The talented individuals who bring Grand Terrace to life every day
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-8">
-            {[
-              { name: "Chef Name", role: "Executive Chef", image: logo },
-              { name: "Manager Name", role: "Restaurant Manager", image: logo },
-              { name: "Sommelier Name", role: "Wine Director", image: logo },
-            ].map((member, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-                className="bg-white shadow-lg overflow-hidden hover:shadow-2xl transition-all group"
-              >
-                <div className="aspect-square overflow-hidden bg-stone-100">
-                  <img
-                    src={member.image}
-                    alt={member.name}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                  />
-                </div>
-                <div className="p-6 text-center">
-                  <h3 className="text-xl font-serif text-stone-900 mb-1">{member.name}</h3>
-                  <p className="text-sm text-[#6F4E37] uppercase tracking-wider font-medium">{member.role}</p>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* CTA Section */}
       <section className="relative py-32 px-6 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-stone-900 via-stone-800 to-stone-900">

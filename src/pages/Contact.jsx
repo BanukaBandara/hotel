@@ -105,7 +105,7 @@ export default function Contact() {
                 Call Us
               </motion.a>
               <motion.a
-                href="infinityresturantsm@gmail.com"
+                href="mailto:infinityresturantsm@gmail.com"
                 whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.95 }}
                 className="group inline-flex items-center gap-3 bg-white/10 backdrop-blur-md border border-white/20 hover:bg-white hover:text-[#6F4E37] text-white px-8 py-4 text-sm uppercase tracking-wider font-bold transition-all duration-300 rounded-sm shadow-xl"

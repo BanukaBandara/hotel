@@ -1,32 +1,42 @@
 export const diningOutlets = [
   {
     id: 1,
-    name: "The Grand Bistro",
-    cuisine: "French Contemporary",
-    description: "Experience the epitome of fine dining with curated French delicacies. Our master chefs use the freshest local ingredients to create a symphony of flavors that will dance on your palate.",
-    image: "https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&q=80&w=1200",
+    name: "GOVERNOR'S BAR",
+    cuisine: "French Contemporary & Spirits",
+    description: "Indulge in an era of colonial elegance. Offering a premium selection of vintage malts and refined French-inspired appetizers, the Governor’s Bar is where heritage meets high-end mixology.",
+    image: "src/assets/ba.png",
     openingHours: "11:00 AM - 11:00 PM",
-    dressCode: "Smart Casual",
-    menuLink: "/menus/grand-bistro-menu.pdf" // Oyaage menu PDF eka thiyena thana
+    dressCode: "Smart Casual / Formal",
+    menuLink: "/menus/governors-bar-menu.pdf" 
   },
   {
     id: 2,
-    name: "Silk Route",
-    cuisine: "Asian Fusion",
-    description: "A journey through the vibrant spices of Asia. From hand-rolled sushi to spicy Szechuan delights, Silk Route offers a modern twist on traditional Eastern flavors in a stunning zen-like atmosphere.",
-    image: "https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&q=80&w=1200",
-    openingHours: "12:00 PM - 11:30 PM",
-    dressCode: "Casual / Formal",
-    menuLink: "/menus/silk-route-menu.pdf"
+    name: "KARAOKE SUITE",
+    cuisine: "Asian Fusion & Bites",
+    description: "Sing your heart out in total privacy. Our Karaoke Suites combine a state-of-the-art sound system with a vibrant menu of Asian street food and signature platters perfect for sharing with the squad.",
+    image: "src/assets/ker.png",
+    openingHours: "06:00 PM - 02:00 AM",
+    dressCode: "Casual",
+    menuLink: "/menus/karaoke-suite-menu.pdf"
   },
   {
     id: 3,
-    name: "Azure Rooftop",
-    cuisine: "Cocktails & Tapas",
-    description: "Sip on handcrafted cocktails while enjoying breathtaking sunset views of the Colombo skyline. The perfect spot for evening relaxation, featuring a selection of international small plates.",
-    image: "https://images.unsplash.com/photo-1533777857889-4be7c70b33f7?auto=format&fit=crop&q=80&w=1200",
-    openingHours: "05:00 PM - 01:00 AM",
-    dressCode: "Trendy / Evening Wear",
-    menuLink: "/menus/azure-drinks-menu.pdf"
+    name: "TAP BAR",
+    cuisine: "Artisan Beers & Tapas",
+    description: "The ultimate destination for craft beer lovers. Enjoy a chilled atmosphere with an extensive range of local and international brews on tap, complemented by spicy, localized tapas.",
+    image: "src/assets/tap.png",
+    openingHours: "04:00 PM - 12:00 AM",
+    dressCode: "Casual / Trendy",
+    menuLink: "/menus/tap-bar-menu.pdf"
+  },
+  {
+    id: 4,
+    name: "ISTANBUL NIGHTS",
+    cuisine: "Middle Eastern & Shisha",
+    description: "Experience the magic of the Bosphorus in the heart of Colombo. Featuring authentic Turkish mezze, grilled delights, and premium Shisha under the stars for a true Mediterranean escape.",
+    image: "src/assets/nig.png",
+    openingHours: "06:00 PM - 03:00 AM",
+    dressCode: "Evening Wear / Smart Casual",
+    menuLink: "/menus/istanbul-nights-menu.pdf"
   }
 ];

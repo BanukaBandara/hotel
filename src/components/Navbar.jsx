@@ -123,7 +123,7 @@ export default function Navbar() {
               type="button"
               onClick={() => {
                 // Replace with your modal or WhatsApp link later
-                window.location.href = "mailto:reservations@example.com?subject=Grand%20Terrace%20Booking";
+                window.location.href = "mailto:infinityresturantsm@gmail.com?subject=Grand%20Terrace%20Booking";
               }}
             >
               Book Now
@@ -172,7 +172,7 @@ export default function Navbar() {
                   onClick={() => {
                     setOpen(false);
                     window.location.href =
-                      "mailto:reservations@example.com?subject=Grand%20Terrace%20Booking";
+                      "infinityresturantsm@gmail.com?subject=Grand%20Terrace%20Booking";
                   }}
                   type="button"
                 >
