@@ -7,8 +7,7 @@ import MainLogo from "../assets/grandterrace-logo.jpeg";
 
 const NAV_LINKS = [
   { to: "/", label: "Home" },
-  { to: "/dining", label: "Dining" },
-  { to: "/events", label: "Weddings & Events" },
+  { to: "/dining", label: "Lounges & Bars" },
   { to: "/About", label: "About" },
   { to: "/Contact", label: "Contact" },
   { to: "/gallery", label: "Gallery" },
