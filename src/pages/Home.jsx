@@ -1,6 +1,6 @@
 import React, { useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { motion, useScroll, useSpring } from 'framer-motion';
+import { motion, useScroll, useSpring, animate } from 'framer-motion';
 import baImg from "../assets/ba.png";
 import kerImg from "../assets/ker.png";
 import tapImg from "../assets/tap.png";
@@ -15,8 +15,6 @@ const outlets = [
 
 const Home = () => {
   const scrollRef = useRef(null);
-  const isHovered = useRef(false);
-  
   const { scrollXProgress } = useScroll({ container: scrollRef });
   const scaleX = useSpring(scrollXProgress, { stiffness: 100, damping: 30 });
 
@@ -24,71 +22,70 @@ const Home = () => {
     const slider = scrollRef.current;
     if (!slider) return;
 
-    let animationFrameId;
-
-    const smoothScroll = () => {
-      if (!isHovered.current && slider) {
-        // Speed eka: 0.8 kiyanne luxury smooth speed ekak.
-        slider.scrollLeft += 0.8; 
-
-        // Loop Logic: අන්තිමට ගියපු ගමන් ආයේ මුලට එනවා දැනෙන්නෙ නැති වෙන්න.
-        if (slider.scrollLeft + slider.offsetWidth >= slider.scrollWidth - 10) {
-          slider.scrollLeft = 1; 
+    // --- FRAMER MOTION POWERED AUTO-SCROLL ---
+    // Laptop & Mobile dekema ekama widiyata smooth yanna animate use karamu
+    const controls = animate(0, 1, {
+      duration: 30, // Speed eka (Wadi kaloth slow wenawa)
+      repeat: Infinity,
+      ease: "linear",
+      onUpdate: (latest) => {
+        if (slider) {
+          const maxScroll = slider.scrollWidth - slider.offsetWidth;
+          slider.scrollLeft = latest * maxScroll;
         }
       }
-      animationFrameId = requestAnimationFrame(smoothScroll);
-    };
+    });
 
-    animationFrameId = requestAnimationFrame(smoothScroll);
+    // Touch karaddi thamai phone eke hira wenne. Eka nisa touch events handle karamu.
+    const stop = () => controls.pause();
+    const play = () => controls.play();
 
-    // Event listeners to pause on hover
-    const pause = () => (isHovered.current = true);
-    const resume = () => (isHovered.current = false);
-
-    slider.addEventListener('mouseenter', pause);
-    slider.addEventListener('mouseleave', resume);
+    slider.addEventListener('mouseenter', stop);
+    slider.addEventListener('mouseleave', play);
+    
+    // Mobile touch ekedi pause wela aye scroll eka start wenna meka oni
+    slider.addEventListener('touchstart', stop);
+    slider.addEventListener('touchend', play);
 
     return () => {
-      cancelAnimationFrame(animationFrameId);
-      slider.removeEventListener('mouseenter', pause);
-      slider.removeEventListener('mouseleave', resume);
+      controls.stop();
+      slider.removeEventListener('mouseenter', stop);
+      slider.removeEventListener('mouseleave', play);
+      slider.removeEventListener('touchstart', stop);
+      slider.removeEventListener('touchend', play);
     };
   }, []);
 
   return (
-    <div className="bg-[#0c0a09] min-h-screen pt-40 md:pt-64 overflow-hidden selection:bg-[#D4A574]">
+    <div className="bg-[#0c0a09] min-h-screen pt-24 md:pt-64 overflow-hidden selection:bg-[#D4A574]">
       
-      {/* Header Section */}
-      <section className="text-center mb-16 px-6 relative z-10">
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1.5 }}>
-          <h2 className="text-[#E6D5C3] text-5xl md:text-8xl font-serif uppercase tracking-[0.1em] leading-tight">
+      {/* Header */}
+      <section className="text-center mb-12 px-6 relative z-10">
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1 }}>
+          <h2 className="text-[#E6D5C3] text-4xl md:text-8xl font-serif uppercase tracking-[0.1em]">
             Dine <span className="italic font-light lowercase text-[#D4A574]">with</span> Us
           </h2>
         </motion.div>
       </section>
 
-      {/* --- SMOOTH CAROUSEL --- */}
+      {/* --- MOBILE OPTIMIZED SLIDER --- */}
       <main 
         ref={scrollRef}
-        // Machan methana "overflow-x-hidden" dapan user scroll karana eka nawaththala auto-slide eka smooth karanna.
-        className="flex overflow-x-hidden no-scrollbar h-[60vh] md:h-[75vh] items-center cursor-default"
+        // Phone eke auto-slide wenna oni nisa overflow-x-hidden danna.
+        // Touch karala scroll karanna oni nam 'overflow-x-auto' danna.
+        className="flex overflow-x-hidden no-scrollbar h-[65vh] md:h-[75vh] items-center"
       >
-        <div className="flex flex-nowrap gap-10 px-10 md:px-[15vw]">
+        <div className="flex flex-nowrap gap-5 md:gap-12 px-6 md:px-[20vw]">
           {outlets.map((item) => (
-            <section key={item.id} className="w-[85vw] md:w-[500px] flex-shrink-0">
-              <div className="relative aspect-[9/14] md:aspect-[9/15] overflow-hidden rounded-[30px] md:rounded-[60px] border border-white/5 shadow-2xl group">
-                <img 
-                  src={item.img} 
-                  alt={item.title}
-                  className="w-full h-full object-cover opacity-60 group-hover:scale-110 transition-transform duration-[3s] ease-out"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent"></div>
-                
-                <div className="absolute inset-0 flex flex-col justify-end items-center text-center p-12 pb-20">
-                  <p className="text-[#D4A574] text-[10px] md:text-xs tracking-[0.6em] uppercase mb-4 font-bold">{item.subtitle}</p>
-                  <h3 className="text-white text-4xl md:text-5xl font-serif mb-10 leading-tight">{item.title}</h3>
+            <section key={item.id} className="w-[85vw] md:w-[480px] flex-shrink-0">
+              <div className="relative aspect-[9/14] md:aspect-[9/15] overflow-hidden rounded-[40px] md:rounded-[60px] border border-white/5 shadow-2xl group">
+                <img src={item.img} alt={item.title} className="w-full h-full object-cover opacity-70" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"></div>
+                <div className="absolute inset-0 flex flex-col justify-center items-center text-center p-8">
+                  <p className="text-[#D4A574] text-[10px] tracking-[0.5em] uppercase mb-4 font-bold">{item.subtitle}</p>
+                  <h3 className="text-white text-3xl md:text-5xl font-serif mb-8">{item.title}</h3>
                   <Link to={item.path}>
-                    <button className="text-[10px] text-white border border-white/40 px-12 py-4 rounded-full uppercase tracking-[0.2em] backdrop-blur-md hover:bg-[#D4A574] hover:text-black transition-all duration-700 font-bold">
+                    <button className="text-[10px] text-white border border-white/40 px-10 py-3 rounded-full uppercase tracking-[0.2em] font-bold active:scale-95 transition-all">
                       Explore
                     </button>
                   </Link>
@@ -96,17 +93,16 @@ const Home = () => {
               </div>
             </section>
           ))}
-          {/* Loop space */}
-          <div className="w-[40vw] flex-shrink-0"></div>
+          {/* Spacer for seamless loop */}
+          <div className="w-[20vw] flex-shrink-0"></div>
         </div>
       </main>
 
-      {/* Progress Bar */}
-      <footer className="mt-16 flex flex-col items-center gap-6 pb-20 opacity-30">
-        <div className="w-48 h-[1px] bg-white/10 relative overflow-hidden">
+      {/* Progress */}
+      <footer className="mt-10 flex flex-col items-center gap-4 pb-10 opacity-30">
+        <div className="w-32 h-[1px] bg-white/10 relative overflow-hidden">
           <motion.div style={{ scaleX }} className="absolute inset-0 bg-[#D4A574] origin-left" />
         </div>
-        <p className="text-[9px] text-stone-600 uppercase tracking-[1em]">Automated Discovery</p>
       </footer>
 
       <style>{`
