@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { Menu, X, ChevronDown, Globe } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
@@ -16,9 +16,20 @@ const NAV_LINKS = [
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
+  const [currentDate, setCurrentDate] = useState("");
+
+  // Ada dawasa auto calculate karana logic eka
+  useEffect(() => {
+    const today = new Date();
+    const formattedDate = today.toLocaleDateString('en-GB', {
+      day: '2-digit',
+      month: 'short',
+      year: 'numeric'
+    });
+    setCurrentDate(formattedDate);
+  }, []);
 
   return (
-    // Z-index eka 999 damma card walata udin penna
     <header className="fixed inset-x-0 top-0 z-[999] w-full shadow-2xl">
       
       {/* --- TOP LAYER (Desktop Only) --- */}
@@ -125,11 +136,14 @@ export default function Navbar() {
           <div className="flex-1 flex border-r border-white/5 h-full items-center px-10 text-[10px] uppercase tracking-[0.2em] text-stone-400 font-bold">
             Grand Terrace <span className="text-[#D4A574] ml-2">Colombo</span>
           </div>
+          
+          {/* Dynamic Date eka methana penwanawa */}
           <div className="flex-1 flex border-r border-white/5 h-full items-center px-10 text-[13px] text-white font-bold tracking-wide text-center justify-center">
-            19 Feb - 20 Feb, 2026
+            {currentDate || "Loading..."}
           </div>
+
           <button className="bg-[#D4A574] text-stone-950 h-full px-12 text-[11px] font-black uppercase tracking-[0.25em] hover:bg-white transition-all">
-            Check Availability
+            BOOK NOW
           </button>
         </div>
       </div>

@@ -1,11 +1,15 @@
 import React, { useRef } from 'react';
 import { motion, useScroll, useSpring } from 'framer-motion';
+import baImg from "../assets/ba.png";
+import kerImg from "../assets/ker.png";
+import tapImg from "../assets/tap.png";
+import nigImg from "../assets/nig.png";
 
 const outlets = [
-  { id: "01", title: "The Cocoa Bar", subtitle: "FINE SPIRITS", img: "https://images.unsplash.com/photo-1559339352-11d035aa65de?q=80&w=1000" },
-  { id: "02", title: "Shisha Lounge", subtitle: "EXOTIC FLAVORS", img: "https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?q=80&w=1000" },
-  { id: "03", title: "Tapbar Elite", subtitle: "CRAFT BREWS", img: "https://images.unsplash.com/photo-1534353473418-4cfa6c56fd38?q=80&w=1000" },
-  { id: "04", title: "Private Soirée", subtitle: "EXCLUSIVE DINING", img: "https://images.unsplash.com/photo-1574096079513-d8259312b785?q=80&w=1000" },
+  { id: "01", title: "Governor's Bar", subtitle: "FINE SPIRITS", img: baImg },
+  { id: "02", title: "ISTANBUL NIGHTS", subtitle: "Shisha Lounge", img: nigImg },
+  { id: "03", title: "Tap Bar", subtitle: "CRAFT BREWS", img: tapImg },
+  { id: "04", title: "Governor's Karaoke", subtitle: "EXCLUSIVE DINING", img: kerImg },
 ];
 
 const Home = () => {
