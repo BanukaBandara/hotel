@@ -50,9 +50,9 @@ const Footer = () => {
               <h4 className="text-[#D4A574] uppercase tracking-[0.4em] text-[10px] font-black mb-10">Discover</h4>
               <ul className="space-y-5 text-[12px] uppercase tracking-widest font-medium">
                 <li><a href="/" className="text-stone-400 hover:text-[#D4A574] transition-colors flex items-center gap-2 group">Home <ArrowUpRight size={12} className="opacity-0 group-hover:opacity-100 transition-all -translate-x-2 group-hover:translate-x-0"/></a></li>
-                <li><a href="/dining" className="text-stone-400 hover:text-[#D4A574] transition-colors flex items-center gap-2 group">Dining <ArrowUpRight size={12} className="opacity-0 group-hover:opacity-100 transition-all -translate-x-2 group-hover:translate-x-0"/></a></li>
-                <li><a href="#" className="text-stone-400 hover:text-[#D4A574] transition-colors flex items-center gap-2 group">Suites <ArrowUpRight size={12} className="opacity-0 group-hover:opacity-100 transition-all -translate-x-2 group-hover:translate-x-0"/></a></li>
-                <li><a href="#" className="text-stone-400 hover:text-[#D4A574] transition-colors flex items-center gap-2 group">Events <ArrowUpRight size={12} className="opacity-0 group-hover:opacity-100 transition-all -translate-x-2 group-hover:translate-x-0"/></a></li>
+                <li><a href="/dining" className="text-stone-400 hover:text-[#D4A574] transition-colors flex items-center gap-2 group">Lounges & Bar <ArrowUpRight size={12} className="opacity-0 group-hover:opacity-100 transition-all -translate-x-2 group-hover:translate-x-0"/></a></li>
+                <li><a href="/about" className="text-stone-400 hover:text-[#D4A574] transition-colors flex items-center gap-2 group">About <ArrowUpRight size={12} className="opacity-0 group-hover:opacity-100 transition-all -translate-x-2 group-hover:translate-x-0"/></a></li>
+                <li><a href="/contact" className="text-stone-400 hover:text-[#D4A574] transition-colors flex items-center gap-2 group">Contact <ArrowUpRight size={12} className="opacity-0 group-hover:opacity-100 transition-all -translate-x-2 group-hover:translate-x-0"/></a></li>
               </ul>
             </div>
             <div>
