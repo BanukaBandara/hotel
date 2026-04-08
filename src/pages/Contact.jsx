@@ -60,13 +60,13 @@ export default function Contact() {
                 <ContactInfoCard 
                   icon={<Phone size={22} />} 
                   title="Direct Line" 
-                  value="+94 11 234 5678"
+                  value="+94 114 998 998"
                   subValue="Concierge Desk"
                 />
                 <ContactInfoCard 
                   icon={<Mail size={22} />} 
                   title="Email Inquiry" 
-                  value="concierge@grandterrace.com"
+                  value="infinityresturant@gmail.com"
                   subValue="Response within 2 hours"
                 />
                 <ContactInfoCard 

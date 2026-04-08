@@ -28,7 +28,7 @@ const Footer = () => {
             {/* Social Media - Gold Circle Style */}
             <div className="flex space-x-5">
               {[
-                { Icon: Instagram, link: "#" },
+                { Icon: Instagram, link: "https://www.instagram.com/grand__terrace?igsh=ZWQ5ejB2anZxZXdu" },
                 { Icon: Facebook, link: "#" },
                 { Icon: Twitter, link: "#" },
                 { Icon: Linkedin, link: "#" }
@@ -103,7 +103,7 @@ const Footer = () => {
             </div>
             <div className="space-y-1">
                 <p className="text-[10px] uppercase tracking-[0.3em] text-stone-500 font-bold">Inquiries</p>
-                <p className="text-[13px] text-white font-medium tracking-wide">+94 11 234 5678</p>
+                <p className="text-[13px] text-white font-medium tracking-wide">+94 11 499 8998</p>
             </div>
           </div>
 
@@ -113,7 +113,7 @@ const Footer = () => {
             </div>
             <div className="space-y-1">
                 <p className="text-[10px] uppercase tracking-[0.3em] text-stone-500 font-bold">Concierge</p>
-                <p className="text-[13px] text-white font-medium tracking-wide">hello@grandterrace.com</p>
+                <p className="text-[13px] text-white font-medium tracking-wide">infinityresturant@gmail.com</p>
             </div>
           </div>
         </div>

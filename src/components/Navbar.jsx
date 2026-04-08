@@ -163,7 +163,7 @@ export default function Navbar() {
           <div className="flex-1 flex items-center justify-center px-8 border-r border-[#D4A574]/7">
             <Phone size={10} className="text-[#D4A574] mr-2" />
             <span className="font-sans text-[9px] tracking-[0.1em] text-[#6b6560]">
-              +94 11 234 5678
+              +94 11 499 8998
             </span>
           </div>
 
@@ -257,7 +257,7 @@ export default function Navbar() {
               <div className="flex items-center justify-center gap-2">
                 <Phone size={10} className="text-[#D4A574]" />
                 <p className="text-center font-sans text-[10px] tracking-[0.3em] text-[#4a4440] uppercase">
-                  +94 11 234 5678
+                  +94 11 499 8998
                 </p>
               </div>
             </div>
