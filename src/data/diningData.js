@@ -2,6 +2,7 @@ import baImg from "../assets/ba.png";
 import kerImg from "../assets/ker.png";
 import tapImg from "../assets/tap.png";
 import nigImg from "../assets/nig.png";
+import istanbulMenu from '../menus/istanbul-nights-menu.pdf';
 
 export const diningOutlets = [
   {
@@ -42,6 +43,6 @@ export const diningOutlets = [
     image: nigImg,
     openingHours: "06:00 PM - 03:00 AM",
     dressCode: "Evening Wear / Smart Casual",
-    menuLink: "/menus/istanbul-nights-menu.pdf"
+    menuLink: "istanbulMenuf"
   }
 ];

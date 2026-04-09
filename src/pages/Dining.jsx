@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Wine, Download, ArrowRight, Clock, ShieldCheck, Flame, Zap, Beer } from 'lucide-react';
-import { diningOutlets } from '../data/diningData'; // Machan meka outletData wage name ekakata change karapan data file eke
+import { diningOutlets } from '../data/diningData'; 
 
 const Dining = () => {
   return (
